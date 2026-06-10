@@ -1,114 +1,192 @@
 export const birds = [
   {
     id: 1,
-    name: 'Snowy Owl',
-    nameCN: '雪鸮',
-    image: 'https://images.unsplash.com/photo-1579019163248-e71d613d2e86?w=600&h=600&fit=crop',
+    name: 'Scaly-sided Merganser',
+    nameCN: '中华秋沙鸭',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/245_Schuppens%C3%A4ger_20091229.JPG/1280px-245_Schuppens%C3%A4ger_20091229.JPG',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Scaly-sided_merganser.jpg/1280px-Scaly-sided_merganser.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Mergus_squamatus_522138030.jpg/1280px-Mergus_squamatus_522138030.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/WWT_Arundel_%282555%29.jpg/1280px-WWT_Arundel_%282555%29.jpg'
+    ],
     factfile: {
-      description: '雪鸮是北极地区最大的猫头鹰之一，以出色的听觉和视觉著称，能在极地的黑暗中精准捕猎。白色的羽毛是它们在雪地中的完美伪装。',
-      stats: { wingspan: '1.5m', weight: '2kg', lifespan: '10年', diet: '旅鼠、野兔' },
-      status: '易危',
-      tags: ['猛禽', '夜行性', '北极']
+      description: '中华秋沙鸭为鸭科秋沙鸭属鸟类，也称鳞胁秋沙鸭、唐秋沙，被称为国鸭。雄鸟头颈黑色泛绿色光泽，两胁具黑色鳞状斑，喙鲜红色。主要栖息于清澈溪流河谷，以鱼类为食，是湿地环境指示物种。',
+      stats: { wingspan: '未找到', weight: '未找到', lifespan: '未找到', diet: '鱼类、水生昆虫幼虫、甲壳类' },
+      status: '濒危（EN）',
+      tags: ['国鸭', '鳞状斑', '湿地指示物种']
     },
-    population: '全球约 28,000 只，数量正在减少。被列为易危物种。',
-    where: '主要分布于北极苔原地区，包括加拿大、俄罗斯、斯堪的纳维亚半岛。冬季会南迁至美国北部和欧亚大陆中部。'
+    population: '全球种群少于5000只成鸟，趋势：下降。主要分布于俄罗斯远东地区（85%）及中国东北。',
+    where: '繁殖地：俄罗斯远东、中国东北（长白山、小兴安岭）。越冬地：中国中部和南部（长江流域）、日本、韩国。'
   },
   {
     id: 2,
-    name: 'Golden Eagle',
-    nameCN: '金雕',
-    image: 'https://images.unsplash.com/photo-1611689342806-0f28d8e5e1b0?w=600&h=600&fit=crop',
+    name: 'Oriental Pied Hornbill',
+    nameCN: '冠斑犀鸟',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Anthracoceros_albirostris.jpg/1280px-Anthracoceros_albirostris.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Anthracoceros_albirostris_-_Changi_Beach_Park.jpg/1280px-Anthracoceros_albirostris_-_Changi_Beach_Park.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Oriental_Pied-Hornbill_by_Tisha_Mukherjee_01.jpg/1280px-Oriental_Pied-Hornbill_by_Tisha_Mukherjee_01.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Kangkareng_Perut_Putih.jpg/1280px-Kangkareng_Perut_Putih.jpg'
+    ],
     factfile: {
-      description: '金雕是北半球最大的猛禽之一，以时速超过300公里的俯冲速度闻名，是自然界最顶级的猎手之一。',
-      stats: { wingspan: '2.3m', weight: '4.5kg', lifespan: '30年', diet: '野兔、松鼠' },
-      status: '无危',
-      tags: ['猛禽', '顶级掠食者', '山地']
+      description: '冠斑犀鸟是犀鸟科中体型最小且分布最广的种类之一。体长55-60cm，头颈背翅黑色泛绿光，腹部白色，喙大型具盔突。以果实和昆虫为食。',
+      stats: { wingspan: '23-36cm', weight: '600-1050g', lifespan: '未找到', diet: '果实（无花果为主）、昆虫、小鸟、蜥蜴' },
+      status: '无危（LC）',
+      tags: ['盔突', '大型种子传播者', '次生洞巢']
     },
-    population: '全球约 170,000 只，在部分分布区域受到威胁。',
-    where: '分布于北半球的山区和开阔地带，包括北美、欧洲、亚洲和北非的山区。'
+    population: '在分布区内较为常见，是犀鸟科中分布最广、数量相对较多的种类，趋势稳定。',
+    where: '印度东部、尼泊尔、缅甸、泰国、老挝、柬埔寨、越南、马来西亚。中国分布：西藏东南部、云南西南部、广西西南部。'
   },
   {
     id: 3,
-    name: 'Atlantic Puffin',
-    nameCN: '北极海鹦',
-    image: 'https://images.unsplash.com/photo-1620127252536-03bdfcb7b519?w=600&h=600&fit=crop',
+    name: "Mrs. Hume's Pheasant",
+    nameCN: '黑颈长尾雉',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Syrmaticus_humiae_104702120.jpg/1280px-Syrmaticus_humiae_104702120.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/5/5a/Syrmaticus_humiae.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Syrmaticus_humiae_104702104.jpg/1280px-Syrmaticus_humiae_104702104.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Hume%E2%80%99sPheasant.jpg/1280px-Hume%E2%80%99sPheasant.jpg'
+    ],
     factfile: {
-      description: '北极海鹦因其色彩鲜艳的喙而被称为"海上小丑"。它们是出色的潜水者，能潜入水下60米捕食小鱼。',
-      stats: { wingspan: '50cm', weight: '500g', lifespan: '25年', diet: '小鱼、虾' },
-      status: '易危',
-      tags: ['海鸟', '潜水', '群居']
+      description: '黑颈长尾雉是一种大型森林雉类，体长达90cm。雄鸟头灰褐色，面部裸皮红色，胸部栗褐色，颈具金属蓝色光泽，尾羽长而灰白具黑色横纹。',
+      stats: { wingspan: '未找到', weight: '未找到', lifespan: '未找到', diet: '植物性食物（嫩芽、果实、种子、叶片）' },
+      status: '易危（VU）',
+      tags: ['长尾雉', '印度省鸟', 'CITES附录I']
     },
-    population: '全球约 12,000,000 只，但部分地区数量急剧下降。',
-    where: '大西洋北部，繁殖于冰岛、挪威、英国和加拿大的沿海悬崖。'
+    population: '全球种群数量未找到具体数据，趋势：下降。因栖息地丧失和捕猎而受威胁。',
+    where: '印度东北部、缅甸北部、泰国西北部。中国分布：云南西南部、广西西部、贵州西南部。'
   },
   {
     id: 4,
-    name: 'Scarlet Macaw',
-    nameCN: '绯红金刚鹦鹉',
-    image: 'https://images.unsplash.com/photo-1544923246-77307dd270aa?w=600&h=600&fit=crop',
+    name: "Cabot's Tragopan",
+    nameCN: '黄腹角雉',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Tragopan_caboti_03.jpg/1280px-Tragopan_caboti_03.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Tragopan_caboti_01.jpg/1280px-Tragopan_caboti_01.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tragopan_caboti_02.jpg/1280px-Tragopan_caboti_02.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Tragopan_caboti_08.jpg/1280px-Tragopan_caboti_08.jpg'
+    ],
     factfile: {
-      description: '绯红金刚鹦鹉是世界上最美丽的鹦鹉之一，以其红、黄、蓝三色羽毛闻名。它们智力极高，能模仿人类说话。',
-      stats: { wingspan: '1m', weight: '1.5kg', lifespan: '75年', diet: '坚果、水果' },
-      status: '易危',
-      tags: ['鹦鹉', '热带雨林', '高智商']
+      description: '黄腹角雉是中国特有鸟类，别名角鸡、吐绶鸡。雄性体长60cm，头黑具橙红色纹，眼下有蓝橙色肉裙，眼上有蓝色肉质角。栖息于海拔600-1800m亚热带常绿阔叶林。',
+      stats: { wingspan: '未找到', weight: '雄约1.4kg，雌约0.9kg', lifespan: '未找到', diet: '植物根、芽、花、果实、种子' },
+      status: '易危（VU）',
+      tags: ['中国特有', '吐绶鸡', '肉角+肉裙']
     },
-    population: '全球约 20,000-50,000 只，因栖息地丧失而减少。',
-    where: '分布于中美洲和南美洲的热带雨林，从墨西哥南部到巴西。'
+    population: '全球种群估计少于10000只，趋势：下降。主要威胁为森林砍伐。',
+    where: '中国东南部特有种：浙江、福建、江西、广东、湖南、广西。'
   },
   {
     id: 5,
-    name: 'Resplendent Quetzal',
-    nameCN: '凤尾绿咬鹃',
-    image: 'https://images.unsplash.com/photo-1590689486987-f6a75e8a75cc?w=600&h=600&fit=crop',
+    name: 'Black-faced Spoonbill',
+    nameCN: '黑脸琵鹭',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Black_faced_spoonbill_at_Niigata.JPG/1280px-Black_faced_spoonbill_at_Niigata.JPG',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Black-faced_spoonbill.jpg/1280px-Black-faced_spoonbill.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Platalea_minor_%2823891785044%29.jpg/1280px-Platalea_minor_%2823891785044%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Platalea_minor_okinawa.jpg/1280px-Platalea_minor_okinawa.jpg'
+    ],
     factfile: {
-      description: '凤尾绿咬鹃被古代玛雅人和阿兹特克人视为神圣之鸟，是中美洲最令人惊叹的鸟类。雄鸟长达1米的尾羽在飞行时如同绿色的丝带。',
-      stats: { wingspan: '80cm', weight: '210g', lifespan: '20年', diet: '水果、昆虫' },
-      status: '近危',
-      tags: ['神圣之鸟', '云雾森林', '长尾羽']
+      description: '黑脸琵鹭因扁平如汤匙的长嘴形似琵琶而得名，又称黑面舞者。全身白色，面部黑色裸露，喙黑色呈匙状。六种琵鹭中数量最稀少、唯一被列为濒危的种类。',
+      stats: { wingspan: '未找到', weight: '未找到', lifespan: '未找到', diet: '小型鱼类、虾蟹、贝类、水生昆虫' },
+      status: '濒危（EN）',
+      tags: ['黑面舞者', '匙状喙', '全球濒危']
     },
-    population: '全球约 50,000 只，近危物种。',
-    where: '分布于墨西哥南部至巴拿马的云雾森林中。'
+    population: '2022年全球同步普查记录6162只，趋势：上升。自1980年代接近灭绝后持续恢复。',
+    where: '繁殖地：朝鲜半岛西海岸。越冬地：台湾、香港、澳门、越南、韩国济州岛、日本。中国分布：东部沿海各省。'
   },
   {
     id: 6,
-    name: 'Bald Eagle',
-    nameCN: '白头海雕',
-    image: 'https://images.unsplash.com/photo-1612024782955-49fae79311c7?w=600&h=600&fit=crop',
+    name: 'White-eared Night Heron',
+    nameCN: '海南鳽',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/White-eared_Night_Heron.jpg/1280px-White-eared_Night_Heron.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NycticoraxMagnificaGronvold.jpg/1280px-NycticoraxMagnificaGronvold.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/a/a5/White-eared_Night_Heron_%28cropped%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Gorsachius_magnificus_map.svg/1280px-Gorsachius_magnificus_map.svg.png'
+    ],
     factfile: {
-      description: '白头海雕是美国的国鸟，以其白色头部和深棕色身体的鲜明对比著称。翼展可达2.4米，主要以鱼类为食。',
-      stats: { wingspan: '2.4m', weight: '5.5kg', lifespan: '20年', diet: '鱼类、水鸟' },
-      status: '无危',
-      tags: ['国鸟', '猛禽', '水域']
+      description: '海南鳽是一种中型夜行性鹭科鸟类，体长54-56厘米。雄鸟体羽黑褐色，颈侧栗色，眼后白色条纹与白色喉部为其显著特征。',
+      stats: { wingspan: '90-100cm', weight: '500-700g', lifespan: '未找到', diet: '鱼类、蛙类、水生昆虫' },
+      status: '近危（NT）',
+      tags: ['夜行性', '极度罕见', '濒危鹭科']
     },
-    population: '全球约 316,700 只，数量已从濒危恢复，保护成功案例。',
-    where: '分布于整个北美洲，从阿拉斯加到墨西哥北部，常栖息于水域附近。'
+    population: '全球种群数量估计在1500-4000只之间，趋势下降。种群密度极低。',
+    where: '中国南方（海南、广东、广西、福建、江西、湖南、贵州、云南）、越南北部。'
   },
   {
     id: 7,
-    name: 'Kingfisher',
-    nameCN: '翠鸟',
-    image: 'https://images.unsplash.com/photo-1520808663317-647b476a81b9?w=600&h=600&fit=crop',
+    name: 'Nonggang Babbler',
+    nameCN: '弄岗穗鹛',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Nonggang_Babbler.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg/1280px-Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg',
+      'https://upload.wikimedia.org/wikipedia/commons/0/0a/Nonggang_Babbler.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg/1280px-Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg'
+    ],
     factfile: {
-      description: '翠鸟以其绚丽的蓝绿色羽毛和闪电般的捕鱼技术闻名。它们能以时速40公里俯冲入水，精准捕捉猎物。',
-      stats: { wingspan: '25cm', weight: '35g', lifespan: '15年', diet: '小鱼、虾' },
-      status: '无危',
-      tags: ['捕鱼高手', '水域', '色彩绚丽']
+      description: '弄岗穗鹛是2008年才被正式描述的新鸟种。外形与斑颈穗鹛相似，具有浅色虹膜、耳后白色新月斑。偏好地栖生活，在岩石间和落叶层下觅食昆虫。',
+      stats: { wingspan: '未找到', weight: '约20-30g', lifespan: '未找到', diet: '昆虫及小型无脊椎动物' },
+      status: '易危（VU）',
+      tags: ['2008年新发现', '中国特有', '喀斯特地貌特有']
     },
-    population: '分布广泛，全球约 600,000 只，部分亚种受威胁。',
-    where: '全球热带和温带地区，常见于河流、湖泊和海岸附近。'
+    population: '全球种群数量估计在2500-9999只之间，趋势下降。仅限于广西弄岗保护区和越南北部边境。',
+    where: '广西弄岗自然保护区，可能分布于云南东南部和越南北部边境。留鸟，不迁徙。'
   },
   {
     id: 8,
-    name: 'Mandarin Duck',
-    nameCN: '鸳鸯',
-    image: 'https://images.unsplash.com/photo-1571752726703-5e7d1f6a986d?w=600&h=600&fit=crop',
+    name: 'Silver Pheasant',
+    nameCN: '白鹇',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Lophura_nycthemera_-Mauritius_-male-8a.jpg/1280px-Lophura_nycthemera_-Mauritius_-male-8a.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/e/eb/Lophura_nycthemera_03_female.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/f/f1/Lophura_nycthemera%2C_Exiandong_reserve%2C_Fujian_1.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Fais%C3%A1n_plateado_%28Lophura_nycthemera%29%2C_Zoo_de_Ciudad_Ho_Chi_Minh%2C_Vietnam%2C_2013-08-14%2C_DD_01.JPG/1280px-Fais%C3%A1n_plateado_%28Lophura_nycthemera%29%2C_Zoo_de_Ciudad_Ho_Chi_Minh%2C_Vietnam%2C_2013-08-14%2C_DD_01.JPG'
+    ],
     factfile: {
-      description: '鸳鸯因其雄鸟华丽的羽毛和雌雄成对的生活习性而成为爱情的象征。雄鸟在繁殖季节拥有橙色、绿色、紫色等多种色彩的羽毛。',
-      stats: { wingspan: '70cm', weight: '600g', lifespan: '10年', diet: '种子、昆虫' },
-      status: '无危',
-      tags: ['爱情象征', '水鸟', '东亚']
+      description: '白鹇是一种大型雉科鸟类，雄鸟黑白分明，头顶黑冠，上体白色带黑色羽纹，下体黑色，脸部裸皮鲜红色。是中国传统文化中的名贵观赏鸟。',
+      stats: { wingspan: '70-80cm', weight: '雄1.0-2.0kg，雌0.7-1.2kg', lifespan: '10-15年', diet: '植物嫩芽、果实、种子、昆虫' },
+      status: '无危（LC）',
+      tags: ['雉科代表', '古典文化象征', '雌雄异色']
     },
-    population: '全球约 65,000 只，数量稳定。',
-    where: '分布于东亚地区，包括中国、日本、韩国和俄罗斯远东地区的湖泊和河流。'
+    population: '全球种群数量整体尚属常见，趋势稳定。有15个亚种，部分如海南亚种受胁。',
+    where: '中国东部和南部、东南亚大陆的山地森林。分布省份：云南、广西、广东、福建、江西、湖南、贵州、四川、海南等。'
+  },
+  {
+    id: 9,
+    name: 'Greater Coucal',
+    nameCN: '褐翅鸦鹃',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Greater_coucal_%28Centropus_sinensis%29.jpg/1280px-Greater_coucal_%28Centropus_sinensis%29.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Crow_pheasant.JPG/1280px-Crow_pheasant.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/A_Greater_Coucal_sitting_on_a_layer_of_Water_Hyacinth.jpg/1280px-A_Greater_Coucal_sitting_on_a_layer_of_Water_Hyacinth.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Greater_Coucal_in_Saswad_August_2025_by_Tisha_Mukherjee_02.jpg/1280px-Greater_Coucal_in_Saswad_August_2025_by_Tisha_Mukherjee_02.jpg'
+    ],
+    factfile: {
+      description: '褐翅鸦鹃是杜鹃科的大型地栖鸟类，体长约48厘米。头、上体和腹部黑色带紫色光泽，背部和翅膀栗褐色，眼睛红色。非寄生性杜鹃，自己孵卵育雏。',
+      stats: { wingspan: '50-60cm', weight: '雄300-400g，雌350-500g', lifespan: '5-8年', diet: '昆虫、蜗牛、小型爬行动物、鸟蛋、果实' },
+      status: '无危（LC）',
+      tags: ['非寄生杜鹃', '地栖性', '低沉共鸣叫声']
+    },
+    population: '全球种群数量在适宜栖息地中较为常见，趋势稳定。分布范围极广。',
+    where: '印度次大陆、中国南方、东南亚至巽他群岛。分布省份：云南、广西、广东、海南、福建、浙江、江西等。'
+  },
+  {
+    id: 10,
+    name: 'Oriental Stork',
+    nameCN: '东方白鹳',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Kounotori_06f4471sv.jpg',
+    gallery: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Ciconia_boyciana_316078980.jpg/1280px-Ciconia_boyciana_316078980.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Ciconia_boyciana_316078984.jpg/1280px-Ciconia_boyciana_316078984.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Ciconia_boyciana_en_vol_-_parties_nomm%C3%A9es.jpg/1280px-Ciconia_boyciana_en_vol_-_parties_nomm%C3%A9es.jpg'
+    ],
+    factfile: {
+      description: '东方白鹳是一种大型涉禽，体长100-129厘米，翼展可达2.22米。全身白色羽毛，飞羽黑色，喙黑色粗壮，眼周裸皮红色。与欧洲白鹳相似但体型更大。',
+      stats: { wingspan: '200-222cm', weight: '2.8-5.9kg', lifespan: '20-30年', diet: '鱼类、蛙类、蛇类、昆虫、小型啮齿动物' },
+      status: '濒危（EN）',
+      tags: ['大型涉禽', '迁徙鸟类', '中日韩保护象征']
+    },
+    population: '全球种群数量估计约3000-5000只，趋势稳定中略有回升。在日本和韩国已野外灭绝，通过人工繁殖再引入。',
+    where: '繁殖地：俄罗斯远东、中国东北（黑龙江、吉林、辽宁）。越冬地：长江中下游（江西鄱阳湖、江苏、安徽）。'
   }
 ]

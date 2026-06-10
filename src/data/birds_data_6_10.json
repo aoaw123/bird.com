@@ -1,0 +1,122 @@
+[
+  {
+    "name": "White-eared Night Heron",
+    "latin": "Gorsachius magnificus",
+    "nameCN": "海南鳽",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/White-eared_Night_Heron.jpg/1280px-White-eared_Night_Heron.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NycticoraxMagnificaGronvold.jpg/1280px-NycticoraxMagnificaGronvold.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/a/a5/White-eared_Night_Heron_%28cropped%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Gorsachius_magnificus_map.svg/1280px-Gorsachius_magnificus_map.svg.png"
+    ],
+    "factfile": {
+      "description": "海南鳽是一种中型夜行性鹭科鸟类，体长54-56厘米。雄鸟体羽黑褐色，颈侧栗色，眼后白色条纹与白色喉部为其显著特征。曾被认为仅分布于中国南方和越南北部，近年相继在柬埔寨、印度和孟加拉国发现新分布点。",
+      "stats": {
+        "wingspan": "90-100cm",
+        "weight": "500-700g",
+        "lifespan": "未找到",
+        "diet": "鱼类、蛙类、水生昆虫"
+      },
+      "status": "近危(NT) / 国家一级保护动物",
+      "tags": ["夜行性", "极度罕见", "濒危鹭科"]
+    },
+    "population": "全球种群数量估计在1500-4000只之间，趋势下降。范围较大但种群密度极低，栖息地丧失和破碎化是主要威胁。",
+    "where": "繁殖地：中国南方（海南、广东、广西、福建、江西、湖南、贵州、云南）、越南北部；越冬地：部分种群在繁殖地越冬；分布省份：海南、广东、广西、福建、江西、湖南、贵州、云南、浙江、安徽"
+  },
+  {
+    "name": "Nonggang Babbler",
+    "latin": "Stachyris nonggangensis",
+    "nameCN": "弄岗穗鹛",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Nonggang_Babbler.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg/1280px-Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg",
+      "https://upload.wikimedia.org/wikipedia/commons/0/0a/Nonggang_Babbler.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg/1280px-Stachyris_nonggangensis_-_byronswift_-_627084243.jpeg"
+    ],
+    "factfile": {
+      "description": "弄岗穗鹛是2008年才被正式描述的新鸟种，属于画眉科。外形与斑颈穗鹛相似，但具有浅色虹膜、耳后白色新月斑和具黑斑的白色喉部。偏好地栖生活，在岩石间和落叶层下觅食昆虫，善奔跑不擅飞行。",
+      "stats": {
+        "wingspan": "未找到",
+        "weight": "约20-30g",
+        "lifespan": "未找到",
+        "diet": "昆虫及小型无脊椎动物"
+      },
+      "status": "易危(VU) / 国家一级保护动物",
+      "tags": ["2008年新发现", "中国特有鸟类", "喀斯特地貌特有"]
+    },
+    "population": "全球种群数量估计在2500-9999只之间，趋势下降。已知分布范围仅限于广西弄岗自然保护区和邻近的越南北部边境喀斯特森林。",
+    "where": "繁殖地：广西弄岗自然保护区；越冬地：留鸟，不迁徙；分布省份：广西（弄岗保护区），可能分布于云南东南部和越南北部边境"
+  },
+  {
+    "name": "Silver Pheasant",
+    "latin": "Lophura nycthemera",
+    "nameCN": "白鹇",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Lophura_nycthemera_-Mauritius_-male-8a.jpg/1280px-Lophura_nycthemera_-Mauritius_-male-8a.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/e/eb/Lophura_nycthemera_03_female.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f1/Lophura_nycthemera%2C_Exiandong_reserve%2C_Fujian_1.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Fais%C3%A1n_plateado_%28Lophura_nycthemera%29%2C_Zoo_de_Ciudad_Ho_Chi_Minh%2C_Vietnam%2C_2013-08-14%2C_DD_01.JPG/1280px-Fais%C3%A1n_plateado_%28Lophura_nycthemera%29%2C_Zoo_de_Ciudad_Ho_Chi_Minh%2C_Vietnam%2C_2013-08-14%2C_DD_01.JPG"
+    ],
+    "factfile": {
+      "description": "白鹇是一种大型雉科鸟类，雄鸟黑白分明，头顶黑冠，上体白色带黑色羽纹，下体黑色，脸部裸皮鲜红色。雌鸟全身棕褐色。栖息于山地森林中，以植物嫩芽、果实、种子和昆虫为食，是中国传统文化中的名贵观赏鸟。",
+      "stats": {
+        "wingspan": "70-80cm",
+        "weight": "雄性1.0-2.0kg，雌性0.7-1.2kg",
+        "lifespan": "10-15年",
+        "diet": "植物嫩芽、果实、种子、昆虫"
+      },
+      "status": "无危(LC) / 国家二级保护动物",
+      "tags": ["雉科代表物种", "中国古典文化象征", "雌雄异色"]
+    },
+    "population": "全球种群数量未精确估计，但整体尚属常见，趋势稳定。有15个亚种，部分如海南亚种等处于受胁状态。",
+    "where": "繁殖地：中国东部和南部、东南亚大陆的山地森林；越冬地：留鸟，垂直迁移；分布省份：云南、广西、广东、福建、江西、湖南、贵州、四川、海南、浙江、安徽、湖北、陕西（南部）"
+  },
+  {
+    "name": "Greater Coucal",
+    "latin": "Centropus sinensis",
+    "nameCN": "褐翅鸦鹃",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Greater_coucal_%28Centropus_sinensis%29.jpg/1280px-Greater_coucal_%28Centropus_sinensis%29.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Crow_pheasant.JPG/1280px-Crow_pheasant.JPG",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/A_Greater_Coucal_sitting_on_a_layer_of_Water_Hyacinth.jpg/1280px-A_Greater_Coucal_sitting_on_a_layer_of_Water_Hyacinth.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Greater_Coucal_in_Saswad_August_2025_by_Tisha_Mukherjee_02.jpg/1280px-Greater_Coucal_in_Saswad_August_2025_by_Tisha_Mukherjee_02.jpg"
+    ],
+    "factfile": {
+      "description": "褐翅鸦鹃是鹃形目杜鹃科的大型地栖鸟类，体长约48厘米。头、上体和腹部黑色带紫色光泽，背部和翅膀栗褐色，眼睛红色。非寄生性杜鹃，自己孵卵育雏。叫声低沉洪亮，在民间传说中常被视为预兆之鸟。",
+      "stats": {
+        "wingspan": "50-60cm",
+        "weight": "雄性300-400g，雌性350-500g",
+        "lifespan": "5-8年",
+        "diet": "昆虫、蜗牛、小型爬行动物、鸟蛋、雏鸟、果实"
+      },
+      "status": "无危(LC) / 国家二级保护动物",
+      "tags": ["非寄生杜鹃", "地栖性", "低沉共鸣叫声"]
+    },
+    "population": "全球种群数量未精确估计，但在适宜栖息地中较为常见，趋势稳定。分布范围极广，从印度次大陆到东南亚及中国南方。",
+    "where": "繁殖地：印度次大陆、中国南方、东南亚至巽他群岛；越冬地：留鸟，不迁徙；分布省份：云南、广西、广东、海南、福建、浙江、江西、湖南、贵州、四川（南部）"
+  },
+  {
+    "name": "Oriental Stork",
+    "latin": "Ciconia boyciana",
+    "nameCN": "东方白鹳",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Kounotori_06f4471sv.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Ciconia_boyciana_316078980.jpg/1280px-Ciconia_boyciana_316078980.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Ciconia_boyciana_316078984.jpg/1280px-Ciconia_boyciana_316078984.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Ciconia_boyciana_en_vol_-_parties_nomm%C3%A9es.jpg/1280px-Ciconia_boyciana_en_vol_-_parties_nomm%C3%A9es.jpg"
+    ],
+    "factfile": {
+      "description": "东方白鹳是一种大型涉禽，体长100-129厘米，翼展可达2.22米。全身白色羽毛，飞羽黑色，喙黑色粗壮，眼周裸皮红色。与欧洲白鹳相似但体型更大。栖息于湿地、沼泽和稻田，以鱼类、蛙类等水生动物为食。",
+      "stats": {
+        "wingspan": "200-222cm",
+        "weight": "2.8-5.9kg",
+        "lifespan": "20-30年",
+        "diet": "鱼类、蛙类、蛇类、昆虫、小型啮齿动物"
+      },
+      "status": "濒危(EN) / 国家一级保护动物",
+      "tags": ["大型涉禽", "迁徙鸟类", "中日韩保护象征"]
+    },
+    "population": "全球种群数量估计约3000-5000只，趋势稳定中略有回升。在日本和韩国已野外灭绝，通过人工繁殖再引入项目恢复种群，中国东北仍有野生繁殖种群。",
+    "where": "繁殖地：俄罗斯远东地区、中国东北（黑龙江、吉林、辽宁）；越冬地：长江中下游地区（江西鄱阳湖、江苏、安徽、湖南）、台湾、华南沿海；分布省份：黑龙江、吉林、辽宁、内蒙古（东部）、河北、山东、江苏、安徽、江西、湖南、湖北、浙江、福建、广东、台湾"
+  }
+]

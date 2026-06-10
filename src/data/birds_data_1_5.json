@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Scaly-sided Merganser",
+    "latin": "Mergus squamatus",
+    "nameCN": "中华秋沙鸭",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/245_Schuppens%C3%A4ger_20091229.JPG/1280px-245_Schuppens%C3%A4ger_20091229.JPG",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Scaly-sided_merganser.jpg/1280px-Scaly-sided_merganser.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Mergus_squamatus_522138030.jpg/1280px-Mergus_squamatus_522138030.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/WWT_Arundel_%282555%29.jpg/1280px-WWT_Arundel_%282555%29.jpg"
+    ],
+    "factfile": {
+      "description": "中华秋沙鸭为鸭科秋沙鸭属鸟类，也称鳞胁秋沙鸭、唐秋沙，被称为国鸭。雄鸟头颈黑色泛绿色光泽，两胁具黑色鳞状斑，喙鲜红色。主要栖息于清澈溪流河谷，以鱼类为食，是湿地环境指示物种。",
+      "stats": {
+        "wingspan": "未找到",
+        "weight": "未找到",
+        "lifespan": "未找到",
+        "diet": "鱼类、水生昆虫幼虫（石蛾、毛翅目）、甲壳类"
+      },
+      "status": "濒危（EN）IUCN 3.1 / 中国国家一级保护动物",
+      "tags": [
+        "国鸭",
+        "鳞状斑",
+        "湿地指示物种"
+      ]
+    },
+    "population": "全球种群少于5000只成鸟及一二年幼鸟，趋势：下降。主要分布于俄罗斯远东地区（85%）及中国东北长白山、小兴安岭等地。",
+    "where": "繁殖地：俄罗斯远东（滨海边疆区、哈巴罗夫斯克）、中国东北（长白山、小兴安岭）、朝鲜北部。越冬地：中国中部和南部（长江流域）、日本、韩国、台湾。主要分布省份：黑龙江、吉林、辽宁、河北、长江以南各省。"
+  },
+  {
+    "name": "Oriental Pied Hornbill",
+    "latin": "Anthracoceros albirostris",
+    "nameCN": "冠斑犀鸟",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Anthracoceros_albirostris.jpg/1280px-Anthracoceros_albirostris.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Anthracoceros_albirostris_-_Changi_Beach_Park.jpg/1280px-Anthracoceros_albirostris_-_Changi_Beach_Park.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Oriental_Pied-Hornbill_by_Tisha_Mukherjee_01.jpg/1280px-Oriental_Pied-Hornbill_by_Tisha_Mukherjee_01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Kangkareng_Perut_Putih.jpg/1280px-Kangkareng_Perut_Putih.jpg"
+    ],
+    "factfile": {
+      "description": "冠斑犀鸟是犀鸟科中体型最小且分布最广的种类之一。体长55-60cm，头颈背翅黑色泛绿光，腹部白色，喙大型具盔突。主要分布于印度次大陆至东南亚，栖息于亚热带或热带低地湿润森林，以果实和昆虫为食。",
+      "stats": {
+        "wingspan": "23-36cm",
+        "weight": "600-1050g（平均900g）",
+        "lifespan": "未找到",
+        "diet": "果实（无花果为主）、大型昆虫、小鸟、蜥蜴、蛙类、鱼类"
+      },
+      "status": "无危（LC）IUCN 3.1 / 中国国家二级保护动物",
+      "tags": [
+        "盔突",
+        "大型种子传播者",
+        "次生洞巢"
+      ]
+    },
+    "population": "未找到具体全球种群数量，趋势：稳定。在分布区内较为常见，是犀鸟科中分布最广、数量相对较多的种类。",
+    "where": "繁殖地/栖息地：印度东部和北部、尼泊尔、孟加拉国、不丹、缅甸、泰国、老挝、柬埔寨、越南、马来西亚、新加坡、印尼（苏门答腊、加里曼丹、爪哇）。中国分布：西藏东南部、云南西南部、广西西南部。"
+  },
+  {
+    "name": "Mrs. Hume's Pheasant",
+    "latin": "Syrmaticus humiae",
+    "nameCN": "黑颈长尾雉",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Syrmaticus_humiae_104702120.jpg/1280px-Syrmaticus_humiae_104702120.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/5/5a/Syrmaticus_humiae.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Syrmaticus_humiae_104702104.jpg/1280px-Syrmaticus_humiae_104702104.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Hume%E2%80%99sPheasant.jpg/1280px-Hume%E2%80%99sPheasant.jpg"
+    ],
+    "factfile": {
+      "description": "黑颈长尾雉是一种大型森林雉类，体长达90cm。雄鸟头灰褐色，面部裸皮红色，胸部栗褐色，颈具金属蓝色光泽，尾羽长而灰白具黑色横纹。是印度曼尼普尔邦和米佐拉姆邦的省鸟，分布于中国西南及东南亚北部。",
+      "stats": {
+        "wingspan": "未找到",
+        "weight": "未找到",
+        "lifespan": "未找到",
+        "diet": "植物性食物（嫩芽、果实、种子、叶片）"
+      },
+      "status": "易危（VU）IUCN 3.1 / 中国国家一级保护动物，CITES附录I",
+      "tags": [
+        "长尾雉",
+        "印度省鸟",
+        "CITES附录I"
+      ]
+    },
+    "population": "全球种群数量未找到具体数据，趋势：下降。因栖息地丧失、种群碎片化和捕猎而受威胁。",
+    "where": "繁殖地/栖息地：印度东北部（阿鲁纳恰尔邦、曼尼普尔、米佐拉姆、那加兰邦）、缅甸北部和东部、泰国西北部。中国分布：云南西南部、广西西部、贵州西南部。"
+  },
+  {
+    "name": "Cabot's Tragopan",
+    "latin": "Tragopan caboti",
+    "nameCN": "黄腹角雉",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Tragopan_caboti_03.jpg/1280px-Tragopan_caboti_03.jpg",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Tragopan_caboti_01.jpg/1280px-Tragopan_caboti_01.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tragopan_caboti_02.jpg/1280px-Tragopan_caboti_02.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Tragopan_caboti_08.jpg/1280px-Tragopan_caboti_08.jpg"
+    ],
+    "factfile": {
+      "description": "黄腹角雉是中国特有鸟类，别名角鸡、吐绶鸡。雄性体长60cm、重约1.4kg，头黑具橙红色纹，眼下有蓝橙色肉裙（可膨胀），眼上有蓝色肉质角。栖息于海拔600-1800m亚热带常绿阔叶林，以植物根、芽、花果为食。",
+      "stats": {
+        "wingspan": "未找到",
+        "weight": "雄约1.4kg，雌约0.9kg",
+        "lifespan": "未找到",
+        "diet": "植物根、芽、花、果实、种子，尤喜交让木（Daphniphyllum macropodum），兼食小型无脊椎动物"
+      },
+      "status": "易危（VU）IUCN 3.1 / 中国国家一级保护动物",
+      "tags": [
+        "中国特有",
+        "吐绶鸡",
+        "肉角+肉裙"
+      ]
+    },
+    "population": "全球种群估计少于10000只，趋势：下降。主要威胁为森林砍伐导致的栖息地丧失。",
+    "where": "繁殖地/栖息地：中国东南部特有种，分布于浙江、福建、江西、广东、湖南、广西。唯一保护地为浙江乌岩岭国家级自然保护区。"
+  },
+  {
+    "name": "Black-faced Spoonbill",
+    "latin": "Platalea minor",
+    "nameCN": "黑脸琵鹭",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Black_faced_spoonbill_at_Niigata.JPG/1280px-Black_faced_spoonbill_at_Niigata.JPG",
+    "gallery": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Black-faced_spoonbill.jpg/1280px-Black-faced_spoonbill.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Platalea_minor_%2823891785044%29.jpg/1280px-Platalea_minor_%2823891785044%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Platalea_minor_okinawa.jpg/1280px-Platalea_minor_okinawa.jpg"
+    ],
+    "factfile": {
+      "description": "黑脸琵鹭是鹮科琵鹭属鸟类，因扁平如汤匙的长嘴形似琵琶而得名，又称黑面舞者。全身白色，面部黑色裸露，喙黑色呈匙状。六种琵鹭中分布最窄、数量最稀少、唯一被列为濒危的种类。栖息于东亚沿海潮间带滩涂。",
+      "stats": {
+        "wingspan": "未找到",
+        "weight": "未找到",
+        "lifespan": "未找到",
+        "diet": "小型鱼类、虾蟹、贝类、水生昆虫等"
+      },
+      "status": "濒危（EN）IUCN 3.1 / 中国国家一级保护动物",
+      "tags": [
+        "黑面舞者",
+        "匙状喙",
+        "全球濒危"
+      ]
+    },
+    "population": "2022年全球同步普查记录6162只个体，趋势：上升。自1980年代接近灭绝后，经保护努力种群持续恢复。",
+    "where": "繁殖地：朝鲜西海岸和韩国西海岸的小型岩石岛屿。越冬地：台湾（曾文溪口、四草）、香港（米埔）、澳门、越南红河三角洲、韩国济州岛、日本九州和冲绳。中国分布：东部沿海各省——辽宁、河北、山东、江苏、上海、浙江、福建、广东、海南、台湾、香港、澳门。"
+  }
+]
