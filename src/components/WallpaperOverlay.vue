@@ -86,7 +86,7 @@ onUnmounted(() => {
 
         <div class="image-viewer">
           <button class="nav-btn prev" @click="prevImage">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -96,7 +96,7 @@ onUnmounted(() => {
           </div>
 
           <button class="nav-btn next" @click="nextImage">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
@@ -195,11 +195,11 @@ onUnmounted(() => {
 }
 
 .nav-btn {
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  color: rgba(0, 0, 0, 0.5);
-  width: 48px;
-  height: 48px;
+  background: rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.6);
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -209,17 +209,18 @@ onUnmounted(() => {
 }
 
 .nav-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.3);
-  color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
 }
 
 .image-wrapper {
-  width: 500px;
-  height: 400px;
-  border-radius: 8px;
+  width: 700px;
+  height: 500px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
 }
 
 .image {
@@ -238,50 +239,52 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 8px;
 }
 
 .download-title {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .download-options {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
 .download-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 20px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  gap: 6px;
+  padding: 16px 28px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .download-link:hover {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
 }
 
 .link-label {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.7);
-  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
 }
 
 .link-size {
-  font-size: 10px;
-  color: rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
   letter-spacing: 1px;
 }
 
