@@ -26,12 +26,15 @@ const stats = computed(() => props.bird.factfile?.stats || {})
 const status = computed(() => props.bird.factfile?.status || '')
 const tags = computed(() => props.bird.factfile?.tags || [])
 
-const statLabels = {
-  wingspan: '翼展',
-  weight: '体重',
-  lifespan: '寿命',
-  diet: '食性'
-}
+const bodyStats = computed(() => {
+  const s = props.bird.factfile?.stats || {}
+  return [
+    { label: '翼展', value: s.wingspan },
+    { label: '体重', value: s.weight },
+    { label: '寿命', value: s.lifespan }
+  ]
+})
+const diet = computed(() => props.bird.factfile?.stats?.diet || '')
 </script>
 
 <template>
@@ -44,12 +47,17 @@ const statLabels = {
       </button>
     </div>
 
-    <div v-if="type === 'factfile'" class="panel-body-factfile">
+    <div class="panel-body-factfile">
       <div class="stats-grid">
-        <div v-for="(value, key) in stats" :key="key" class="stat-item">
-          <span class="stat-label">{{ statLabels[key] }}</span>
-          <span class="stat-value">{{ value }}</span>
+        <div v-for="item in bodyStats" :key="item.label" class="stat-item">
+          <span class="stat-label">{{ item.label }}</span>
+          <span class="stat-value">{{ item.value }}</span>
         </div>
+      </div>
+
+      <div class="diet-card">
+        <span class="diet-label">食性</span>
+        <span class="diet-value">{{ diet }}</span>
       </div>
 
       <div class="status-row">
@@ -60,10 +68,16 @@ const statLabels = {
       </div>
 
       <p class="panel-content">{{ content }}</p>
-    </div>
 
-    <div v-else class="panel-body">
-      <p class="panel-content">{{ content }}</p>
+      <div class="section">
+        <h4 class="section-title">种群数量</h4>
+        <p class="panel-content">{{ bird.population }}</p>
+      </div>
+
+      <div class="section">
+        <h4 class="section-title">分布区域</h4>
+        <p class="panel-content">{{ bird.where }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -133,8 +147,31 @@ const statLabels = {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+.diet-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.diet-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+}
+
+.diet-value {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
 }
 
 .stat-item {
