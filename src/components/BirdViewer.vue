@@ -7,9 +7,9 @@ const props = defineProps({
 const emit = defineEmits(['toggle-panel'])
 
 const buttons = [
-  { key: 'factfile', label: 'Factfile' },
-  { key: 'population', label: 'Population' },
-  { key: 'where', label: 'Where' }
+  { key: 'factfile', label: '物种档案' },
+  { key: 'population', label: '种群数量' },
+  { key: 'where', label: '分布区域' }
 ]
 </script>
 
