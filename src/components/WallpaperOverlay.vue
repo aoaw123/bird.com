@@ -1,0 +1,324 @@
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+
+const props = defineProps({
+  bird: { type: Object, required: true }
+})
+
+const emit = defineEmits(['close'])
+
+const currentImageIndex = ref(0)
+const isVisible = ref(false)
+const isContentVisible = ref(false)
+
+// Get images from public folder based on bird id
+const images = computed(() => {
+  const id = props.bird.id
+  const folderName = `${id}. ${props.bird.nameCN}`
+  // For now, use placeholder - will need to copy images to public folder
+  return [
+    `/birds/${folderName}/1.jpg`,
+    `/birds/${folderName}/2.jpg`,
+    `/birds/${folderName}/3.jpg`,
+    `/birds/${folderName}/4.jpg`,
+    `/birds/${folderName}/5.jpg`
+  ]
+})
+
+const currentImage = computed(() => images.value[currentImageIndex.value])
+
+function nextImage() {
+  currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
+}
+
+function prevImage() {
+  currentImageIndex.value = (currentImageIndex.value - 1 + images.value.length) % images.value.length
+}
+
+function handleKeydown(e) {
+  if (e.key === 'Escape') {
+    handleClose()
+  } else if (e.key === 'ArrowRight') {
+    nextImage()
+  } else if (e.key === 'ArrowLeft') {
+    prevImage()
+  }
+}
+
+function handleClose() {
+  isContentVisible.value = false
+  setTimeout(() => {
+    isVisible.value = false
+    setTimeout(() => {
+      emit('close')
+    }, 600)
+  }, 200)
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown)
+  // Trigger animation
+  requestAnimationFrame(() => {
+    isVisible.value = true
+    setTimeout(() => {
+      isContentVisible.value = true
+    }, 300)
+  })
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+})
+</script>
+
+<template>
+  <Teleport to="body">
+    <div
+      class="wallpaper-overlay"
+      :class="{ visible: isVisible }"
+      @click.self="handleClose"
+    >
+      <div class="content" :class="{ visible: isContentVisible }">
+        <div class="header">
+          <h2 class="title">{{ bird.nameCN }}</h2>
+          <p class="subtitle">{{ bird.name }}</p>
+        </div>
+
+        <div class="image-viewer">
+          <button class="nav-btn prev" @click="prevImage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="image-wrapper">
+            <img :src="currentImage" :alt="bird.nameCN" class="image" />
+          </div>
+
+          <button class="nav-btn next" @click="nextImage">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="image-counter">
+          {{ currentImageIndex + 1 }} / {{ images.length }}
+        </div>
+
+        <div class="download-section">
+          <p class="download-title">下载壁纸</p>
+          <div class="download-options">
+            <a :href="currentImage" download class="download-link">
+              <span class="link-label">MacBook</span>
+              <span class="link-size">1440x900</span>
+            </a>
+            <a :href="currentImage" download class="download-link">
+              <span class="link-label">Large Desktop</span>
+              <span class="link-size">1920x1080</span>
+            </a>
+            <a :href="currentImage" download class="download-link">
+              <span class="link-label">Small Desktop</span>
+              <span class="link-size">1366x768</span>
+            </a>
+          </div>
+        </div>
+
+        <button class="close-btn" @click="handleClose">
+          <span class="close-icon">&times;</span>
+          <span class="close-text">关闭</span>
+        </button>
+      </div>
+    </div>
+  </Teleport>
+</template>
+
+<style scoped>
+.wallpaper-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.wallpaper-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: rgba(0, 0, 0, 0.45);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.image-viewer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.5);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.image-wrapper {
+  width: 500px;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-counter {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 2px;
+}
+
+.download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.download-title {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.download-options {
+  display: flex;
+  gap: 12px;
+}
+
+.download-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.download-link:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.link-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+.link-size {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.35);
+  letter-spacing: 1px;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.5);
+  padding: 8px 20px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  margin-top: 8px;
+}
+
+.close-btn:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.close-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .image-wrapper {
+    width: 90vw;
+    height: 60vw;
+  }
+
+  .download-options {
+    flex-direction: column;
+  }
+}
+</style>

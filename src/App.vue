@@ -5,26 +5,25 @@ import BirdViewer from './components/BirdViewer.vue'
 import InfoPanel from './components/InfoPanel.vue'
 import NavDots from './components/NavDots.vue'
 import ArrowNav from './components/ArrowNav.vue'
+import WallpaperOverlay from './components/WallpaperOverlay.vue'
 
 const currentIndex = ref(0)
 const activePanel = ref(null)
 const blurAmount = ref(60)
+const showWallpaper = ref(false)
 
 const currentBird = computed(() => birds[currentIndex.value])
 
 function goNext() {
   currentIndex.value = (currentIndex.value + 1) % birds.length
-  activePanel.value = null
 }
 
 function goPrev() {
   currentIndex.value = (currentIndex.value - 1 + birds.length) % birds.length
-  activePanel.value = null
 }
 
 function goTo(index) {
   currentIndex.value = index
-  activePanel.value = null
 }
 
 function togglePanel(type) {
@@ -33,6 +32,14 @@ function togglePanel(type) {
 
 function closePanel() {
   activePanel.value = null
+}
+
+function openWallpaper() {
+  showWallpaper.value = true
+}
+
+function closeWallpaper() {
+  showWallpaper.value = false
 }
 </script>
 
@@ -69,6 +76,7 @@ function closePanel() {
         :bird="currentBird"
         :active-panel="activePanel"
         @toggle-panel="togglePanel"
+        @open-wallpaper="openWallpaper"
       />
     </Transition>
 
@@ -85,6 +93,12 @@ function closePanel() {
       :total="birds.length"
       :current="currentIndex"
       @go-to="goTo"
+    />
+
+    <WallpaperOverlay
+      v-if="showWallpaper"
+      :bird="currentBird"
+      @close="closeWallpaper"
     />
   </div>
 </template>

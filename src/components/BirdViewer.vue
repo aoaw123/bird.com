@@ -4,10 +4,11 @@ const props = defineProps({
   activePanel: { type: String, default: null }
 })
 
-const emit = defineEmits(['toggle-panel'])
+const emit = defineEmits(['toggle-panel', 'open-wallpaper'])
 
 const buttons = [
-  { key: 'factfile', label: '物种档案' }
+  { key: 'factfile', label: '物种档案' },
+  { key: 'wallpaper', label: 'Wallpaper' }
 ]
 </script>
 
@@ -26,7 +27,7 @@ const buttons = [
         :key="btn.key"
         class="action-btn"
         :class="{ active: activePanel === btn.key }"
-        @click="emit('toggle-panel', btn.key)"
+        @click="btn.key === 'wallpaper' ? emit('open-wallpaper') : emit('toggle-panel', btn.key)"
       >
         {{ btn.label }}
       </button>
