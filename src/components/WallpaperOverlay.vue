@@ -45,6 +45,17 @@ function handleKeydown(e) {
   }
 }
 
+function handleImageClick(e) {
+  const rect = e.currentTarget.getBoundingClientRect()
+  const clickX = e.clientX - rect.left
+  const halfWidth = rect.width / 2
+  if (clickX < halfWidth) {
+    prevImage()
+  } else {
+    nextImage()
+  }
+}
+
 function handleClose() {
   isContentVisible.value = false
   setTimeout(() => {
@@ -86,17 +97,17 @@ onUnmounted(() => {
 
         <div class="image-viewer">
           <button class="nav-btn prev" @click="prevImage">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
 
-          <div class="image-wrapper">
+          <div class="image-wrapper" @click="handleImageClick">
             <img :src="currentImage" :alt="bird.nameCN" class="image" />
           </div>
 
           <button class="nav-btn next" @click="nextImage">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>
@@ -198,14 +209,15 @@ onUnmounted(() => {
   background: rgba(0, 0, 0, 0.08);
   border: 2px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.6);
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .nav-btn:hover {
@@ -216,11 +228,12 @@ onUnmounted(() => {
 }
 
 .image-wrapper {
-  width: 700px;
-  height: 500px;
+  width: 850px;
+  height: 550px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .image {
