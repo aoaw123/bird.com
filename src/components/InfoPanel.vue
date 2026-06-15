@@ -159,16 +159,14 @@ onMounted(() => {
 <style scoped>
 .info-panel {
   position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translateY(-50%);
-  width: 380px;
-  max-height: 70vh;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100vh;
   overflow-y: auto;
   background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 28px;
   z-index: 10;
 }

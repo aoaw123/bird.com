@@ -199,16 +199,14 @@ function updateTooltip(e) {
 <style scoped>
 .bird-radar {
   position: absolute;
-  left: 5%;
+  left: 14%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 16px;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  padding: 0;
   pointer-events: auto;
 }
 
@@ -274,8 +272,8 @@ function updateTooltip(e) {
 
 @media (max-width: 768px) {
   .bird-radar {
-    transform: translateY(-50%) scale(0.75);
-    left: 2%;
+    transform: translateY(-50%) scale(0.65);
+    left: 50%;
   }
 }
 </style>
