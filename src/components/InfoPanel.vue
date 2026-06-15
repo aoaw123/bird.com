@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch, onMounted, nextTick } from 'vue'
 
 const props = defineProps({
   bird: { type: Object, required: true },
@@ -35,6 +35,80 @@ const bodyStats = computed(() => {
   ]
 })
 const diet = computed(() => props.bird.factfile?.stats?.diet || '')
+
+// Count-up animation
+const animatedStats = ref({ wingspan: '', weight: '', lifespan: '' })
+
+function extractNumber(str) {
+  if (!str) return null
+  const match = str.match(/[\d.]+/)
+  return match ? parseFloat(match[0]) : null
+}
+
+function countUp(target, key, unit) {
+  const num = extractNumber(target)
+  if (num === null || isNaN(num)) {
+    animatedStats.value[key] = target
+    return
+  }
+
+  const duration = 800
+  const startTime = performance.now()
+  const isFloat = num % 1 !== 0
+
+  function tick(now) {
+    const elapsed = now - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    // ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3)
+    const current = num * eased
+
+    if (isFloat) {
+      animatedStats.value[key] = current.toFixed(1) + unit
+    } else {
+      animatedStats.value[key] = Math.round(current) + unit
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(tick)
+    } else {
+      animatedStats.value[key] = target
+    }
+  }
+
+  animatedStats.value[key] = isFloat ? '0.0' + unit : '0' + unit
+  requestAnimationFrame(tick)
+}
+
+function animateStats() {
+  const s = props.bird.factfile?.stats || {}
+  const fields = [
+    { key: 'wingspan', value: s.wingspan },
+    { key: 'weight', value: s.weight },
+    { key: 'lifespan', value: s.lifespan }
+  ]
+
+  fields.forEach((field, i) => {
+    setTimeout(() => {
+      const val = field.value || ''
+      const num = extractNumber(val)
+      if (num !== null) {
+        const unit = val.replace(/[\d.]+/, '')
+        countUp(val, field.key, '')
+      } else {
+        animatedStats.value[field.key] = val
+      }
+    }, i * 150)
+  })
+}
+
+watch(() => props.bird.id, () => {
+  nextTick(animateStats)
+}, { immediate: true })
+
+onMounted(() => {
+  nextTick(animateStats)
+})
 </script>
 
 <template>
@@ -49,9 +123,9 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
 
     <div class="panel-body-factfile">
       <div class="stats-grid">
-        <div v-for="item in bodyStats" :key="item.label" class="stat-item">
+        <div v-for="(item, idx) in bodyStats" :key="item.label" class="stat-item">
           <span class="stat-label">{{ item.label }}</span>
-          <span class="stat-value">{{ item.value }}</span>
+          <span class="stat-value">{{ animatedStats[['wingspan','weight','lifespan'][idx]] || item.value }}</span>
         </div>
       </div>
 
@@ -99,6 +173,20 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
   z-index: 10;
 }
 
+/* Custom scrollbar */
+.info-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.info-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.info-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -132,6 +220,10 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
 .close-btn:hover {
   border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
+}
+
+.close-btn:active {
+  transform: scale(0.95);
 }
 
 .close-icon {
@@ -195,6 +287,7 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
   font-size: 15px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
+  font-variant-numeric: tabular-nums;
 }
 
 .status-row {
@@ -233,11 +326,27 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
   color: rgba(255, 255, 255, 0.8);
 }
 
+.section-title {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
 @media (max-width: 768px) {
   .info-panel {
-    bottom: 60px;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 60vh;
+    border-radius: 16px 16px 0 0;
+    transform: none;
     padding: 24px;
-    width: 95%;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   }
 
   .stats-grid {
@@ -246,6 +355,14 @@ const diet = computed(() => props.bird.factfile?.stats?.diet || '')
 
   .panel-content {
     font-size: 14px;
+  }
+
+  .status-row {
+    flex-wrap: wrap;
+  }
+
+  .tags {
+    flex-wrap: wrap;
   }
 }
 </style>

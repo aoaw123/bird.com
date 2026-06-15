@@ -46,10 +46,22 @@ const emit = defineEmits(['prev', 'next'])
   transition: all 0.3s ease;
 }
 
-.arrow-btn:hover {
+.arrow-btn.prev:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.4);
   color: #ffffff;
+  transform: translateX(-4px);
+}
+
+.arrow-btn.next:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.arrow-btn:active {
+  transform: scale(0.95);
 }
 
 @media (max-width: 768px) {
@@ -58,8 +70,8 @@ const emit = defineEmits(['prev', 'next'])
   }
 
   .arrow-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .arrow-btn svg {

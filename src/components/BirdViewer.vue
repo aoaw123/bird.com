@@ -1,10 +1,30 @@
 <script setup>
+import { ref, watch } from 'vue'
+
 const props = defineProps({
   bird: { type: Object, required: true },
   activePanel: { type: String, default: null }
 })
 
-const emit = defineEmits(['toggle-panel', 'open-wallpaper'])
+const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery'])
+
+const imageLoaded = ref(false)
+const imageError = ref(false)
+
+// Reset state when bird changes
+watch(() => props.bird.id, () => {
+  imageLoaded.value = false
+  imageError.value = false
+})
+
+function onImageLoad() {
+  imageLoaded.value = true
+}
+
+function onImageError() {
+  imageError.value = true
+  imageLoaded.value = true
+}
 
 const buttons = [
   { key: 'factfile', label: '物种档案' },
@@ -14,8 +34,28 @@ const buttons = [
 
 <template>
   <div class="bird-viewer">
-    <div class="bird-image-wrapper">
-      <img :src="bird.image" :alt="bird.name" class="bird-image" />
+    <div class="bird-image-wrapper" @click="emit('open-gallery')">
+      <!-- Skeleton -->
+      <div v-if="!imageLoaded" class="skeleton">
+        <span class="skeleton-icon">🪶</span>
+      </div>
+
+      <!-- Fallback -->
+      <div v-if="imageError" class="fallback">
+        <span class="fallback-char">{{ bird.nameCN.charAt(0) }}</span>
+      </div>
+
+      <!-- Main image -->
+      <img
+        v-show="!imageError"
+        :src="bird.image"
+        :alt="bird.name"
+        class="bird-image"
+        :class="{ loaded: imageLoaded }"
+        loading="lazy"
+        @load="onImageLoad"
+        @error="onImageError"
+      />
     </div>
 
     <h1 class="bird-name">{{ bird.name }}</h1>
@@ -50,13 +90,59 @@ const buttons = [
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
+.bird-image-wrapper:hover {
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+}
+
+/* Skeleton */
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.06);
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-icon {
+  font-size: 48px;
+  opacity: 0.3;
+}
+
+/* Fallback */
+.fallback {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fallback-char {
+  font-size: 80px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* Image */
 .bird-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.bird-image.loaded {
+  opacity: 1;
 }
 
 .bird-name {
@@ -99,6 +185,10 @@ const buttons = [
   border-color: rgba(255, 255, 255, 0.6);
   color: #ffffff;
   background: rgba(255, 255, 255, 0.05);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
 }
 
 .action-btn.active {

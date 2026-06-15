@@ -1,19 +1,24 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { useSwipe, onKeyStroke } from '@vueuse/core'
 import { birds } from './data/birds.js'
 import BirdViewer from './components/BirdViewer.vue'
 import InfoPanel from './components/InfoPanel.vue'
 import NavDots from './components/NavDots.vue'
 import ArrowNav from './components/ArrowNav.vue'
 import WallpaperOverlay from './components/WallpaperOverlay.vue'
+import GalleryViewer from './components/GalleryViewer.vue'
+import KeyboardHints from './components/KeyboardHints.vue'
 
 const currentIndex = ref(0)
 const activePanel = ref(null)
 const blurAmount = ref(60)
 const showWallpaper = ref(false)
+const showGallery = ref(false)
 
 const currentBird = computed(() => birds[currentIndex.value])
 
+// --- Navigation ---
 function goNext() {
   currentIndex.value = (currentIndex.value + 1) % birds.length
 }
@@ -41,11 +46,78 @@ function openWallpaper() {
 function closeWallpaper() {
   showWallpaper.value = false
 }
+
+function openGallery() {
+  showGallery.value = true
+}
+
+function closeGallery() {
+  showGallery.value = false
+}
+
+// --- Keyboard navigation ---
+onKeyStroke('ArrowLeft', () => {
+  if (!showWallpaper.value && !showGallery.value) goPrev()
+})
+
+onKeyStroke('ArrowRight', () => {
+  if (!showWallpaper.value && !showGallery.value) goNext()
+})
+
+onKeyStroke('Escape', () => {
+  if (showGallery.value) {
+    closeGallery()
+  } else if (showWallpaper.value) {
+    closeWallpaper()
+  } else if (activePanel.value) {
+    closePanel()
+  }
+})
+
+onKeyStroke(' ', (e) => {
+  if (!showWallpaper.value && !showGallery.value) {
+    e.preventDefault()
+    if (activePanel.value) {
+      closePanel()
+    } else {
+      togglePanel('factfile')
+    }
+  }
+})
+
+// --- Swipe gesture (mobile) ---
+const appContainer = ref(null)
+const { direction } = useSwipe(appContainer, {
+  onSwipeEnd() {
+    if (showWallpaper.value || showGallery.value) return
+    if (direction.value === 'left') {
+      goNext()
+    } else if (direction.value === 'right') {
+      goPrev()
+    }
+  }
+})
+
+// --- Preload next bird image ---
+function preloadImage(url) {
+  const img = new Image()
+  img.src = url
+}
+
+watch(currentIndex, (newIdx) => {
+  const nextIdx = (newIdx + 1) % birds.length
+  preloadImage(birds[nextIdx].image)
+})
+
+// Preload first next image on mount
+onMounted(() => {
+  preloadImage(birds[1].image)
+})
 </script>
 
 <template>
-  <div class="app">
-    <Transition name="fade-bg" mode="out-in">
+  <div ref="appContainer" class="app">
+    <Transition name="fade-bg" mode="out-in" appear>
       <div
         :key="currentBird.id"
         class="bg-blur"
@@ -70,17 +142,18 @@ function closeWallpaper() {
 
     <ArrowNav @prev="goPrev" @next="goNext" />
 
-    <Transition name="fade" mode="out-in">
+    <Transition name="fade" mode="out-in" appear>
       <BirdViewer
         :key="currentBird.id"
         :bird="currentBird"
         :active-panel="activePanel"
         @toggle-panel="togglePanel"
         @open-wallpaper="openWallpaper"
+        @open-gallery="openGallery"
       />
     </Transition>
 
-    <Transition name="slide-up">
+    <Transition name="slide-right">
       <InfoPanel
         v-if="activePanel"
         :bird="currentBird"
@@ -100,6 +173,14 @@ function closeWallpaper() {
       :bird="currentBird"
       @close="closeWallpaper"
     />
+
+    <GalleryViewer
+      v-if="showGallery"
+      :bird="currentBird"
+      @close="closeGallery"
+    />
+
+    <KeyboardHints />
   </div>
 </template>
 
@@ -114,6 +195,7 @@ function closeWallpaper() {
   justify-content: center;
   background: #0d0d0d;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .bg-blur {
@@ -126,7 +208,7 @@ function closeWallpaper() {
 
 .fade-bg-enter-active,
 .fade-bg-leave-active {
-  transition: opacity 0.8s ease;
+  transition: opacity 1.2s ease;
 }
 
 .fade-bg-enter-from,
@@ -147,6 +229,12 @@ function closeWallpaper() {
   padding: 10px 16px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.blur-control:hover {
+  opacity: 0.9;
 }
 
 .blur-label {
