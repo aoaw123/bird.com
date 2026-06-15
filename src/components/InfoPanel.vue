@@ -24,6 +24,14 @@ const content = computed(() => {
 
 const stats = computed(() => props.bird.factfile?.stats || {})
 const status = computed(() => props.bird.factfile?.status || '')
+
+const statusClass = computed(() => {
+  const s = status.value
+  if (s.includes('濒')) return 'status-danger'
+  if (s.includes('易')) return 'status-warning'
+  if (s.includes('近')) return 'status-caution'
+  return 'status-safe'
+})
 const tags = computed(() => props.bird.factfile?.tags || [])
 
 const bodyStats = computed(() => {
@@ -135,7 +143,7 @@ onMounted(() => {
       </div>
 
       <div class="status-row">
-        <span class="status-badge">{{ status }}</span>
+        <span class="status-badge" :class="statusClass">{{ status }}</span>
         <div class="tags">
           <span v-for="tag in tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
@@ -296,12 +304,31 @@ onMounted(() => {
 
 .status-badge {
   padding: 4px 12px;
-  background: rgba(255, 100, 100, 0.2);
-  border: 1px solid rgba(255, 100, 100, 0.3);
   border-radius: 4px;
   font-size: 12px;
-  color: #ff8888;
   letter-spacing: 1px;
+  background: rgba(100, 200, 100, 0.15);
+  border: 1px solid rgba(100, 200, 100, 0.3);
+  color: #88cc88;
+  transition: all 0.3s ease;
+}
+
+.status-badge.status-danger {
+  background: rgba(255, 80, 80, 0.15);
+  border-color: rgba(255, 80, 80, 0.25);
+  color: #ff6666;
+}
+
+.status-badge.status-warning {
+  background: rgba(255, 160, 60, 0.15);
+  border-color: rgba(255, 160, 60, 0.25);
+  color: #ffa83c;
+}
+
+.status-badge.status-caution {
+  background: rgba(255, 210, 60, 0.15);
+  border-color: rgba(255, 210, 60, 0.25);
+  color: #f5c842;
 }
 
 .tags {
