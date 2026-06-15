@@ -35,6 +35,14 @@ function prevImage() {
   currentImageIndex.value = (currentImageIndex.value - 1 + images.value.length) % images.value.length
 }
 
+let wheelTimer = null
+function handleWheel(e) {
+  if (wheelTimer) return
+  wheelTimer = setTimeout(() => { wheelTimer = null }, 300)
+  if (e.deltaY > 0) nextImage()
+  else if (e.deltaY < 0) prevImage()
+}
+
 function handleKeydown(e) {
   if (e.key === 'Escape') {
     handleClose()
@@ -88,6 +96,7 @@ onUnmounted(() => {
       class="wallpaper-overlay"
       :class="{ visible: isVisible }"
       @click.self="handleClose"
+      @wheel="handleWheel"
     >
       <div class="content" :class="{ visible: isContentVisible }">
         <div class="header">
