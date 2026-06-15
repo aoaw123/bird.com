@@ -8,6 +8,7 @@ import NavDots from './components/NavDots.vue'
 import ArrowNav from './components/ArrowNav.vue'
 import WallpaperOverlay from './components/WallpaperOverlay.vue'
 import GalleryViewer from './components/GalleryViewer.vue'
+import BirdRadar from './components/BirdRadar.vue'
 import KeyboardHints from './components/KeyboardHints.vue'
 
 const currentIndex = ref(0)
@@ -160,6 +161,13 @@ onMounted(() => {
         @toggle-panel="togglePanel"
         @open-wallpaper="openWallpaper"
         @open-gallery="openGallery"
+      />
+    </Transition>
+
+    <Transition name="fade">
+      <BirdRadar
+        v-if="activePanel === 'factfile'"
+        :bird="currentBird"
       />
     </Transition>
 
