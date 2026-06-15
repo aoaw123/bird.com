@@ -122,7 +122,7 @@ onMounted(() => {
         :key="currentBird.id"
         class="bg-blur"
         :style="{
-          backgroundImage: `url(${currentBird.image})`,
+          backgroundImage: `url(${encodeURI(currentBird.image)})`,
           filter: `blur(${blurAmount}px) brightness(0.3)`
         }"
       ></div>
