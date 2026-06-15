@@ -12,7 +12,7 @@ import KeyboardHints from './components/KeyboardHints.vue'
 
 const currentIndex = ref(0)
 const activePanel = ref(null)
-const blurAmount = ref(60)
+const blurAmount = ref(0)
 const showWallpaper = ref(false)
 const showGallery = ref(false)
 
@@ -85,6 +85,16 @@ onKeyStroke(' ', (e) => {
   }
 })
 
+// --- Mouse wheel navigation ---
+let wheelTimeout = null
+function onWheel(e) {
+  if (showWallpaper.value || showGallery.value) return
+  if (wheelTimeout) return
+  wheelTimeout = setTimeout(() => { wheelTimeout = null }, 300)
+  if (e.deltaY > 0) goNext()
+  else if (e.deltaY < 0) goPrev()
+}
+
 // --- Swipe gesture (mobile) ---
 const appContainer = ref(null)
 const { direction } = useSwipe(appContainer, {
@@ -116,7 +126,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="appContainer" class="app">
+  <div ref="appContainer" class="app" @wheel="onWheel">
     <Transition name="fade-bg" mode="out-in" appear>
       <div
         :key="currentBird.id"
