@@ -160,13 +160,13 @@ onMounted(() => {
 .info-panel {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 400px;
   height: 100vh;
   overflow-y: auto;
   background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: 28px;
   z-index: 10;
 }
