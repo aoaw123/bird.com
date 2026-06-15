@@ -6,7 +6,7 @@ const props = defineProps({
   activePanel: { type: String, default: null }
 })
 
-const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery'])
+const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery', 'open-video'])
 
 const imageLoaded = ref(false)
 const imageError = ref(false)
@@ -28,7 +28,8 @@ function onImageError() {
 
 const buttons = [
   { key: 'factfile', label: '物种档案' },
-  { key: 'wallpaper', label: 'Wallpaper' }
+  { key: 'wallpaper', label: 'Wallpaper' },
+  { key: 'video', label: '视频' }
 ]
 </script>
 
@@ -67,7 +68,7 @@ const buttons = [
         :key="btn.key"
         class="action-btn"
         :class="{ active: activePanel === btn.key }"
-        @click="btn.key === 'wallpaper' ? emit('open-wallpaper') : emit('toggle-panel', btn.key)"
+        @click="btn.key === 'video' ? emit('open-video') : btn.key === 'wallpaper' ? emit('open-wallpaper') : emit('toggle-panel', btn.key)"
       >
         {{ btn.label }}
       </button>
