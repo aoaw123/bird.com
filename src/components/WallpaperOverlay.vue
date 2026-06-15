@@ -266,11 +266,11 @@ onUnmounted(() => {
 }
 
 .download-title {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .download-options {
@@ -284,29 +284,30 @@ onUnmounted(() => {
   align-items: center;
   gap: 6px;
   padding: 16px 28px;
-  background: rgba(0, 0, 0, 0.06);
-  border: 2px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .download-link:hover {
-  background: rgba(0, 0, 0, 0.12);
-  border-color: rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
   transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 .link-label {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 2px;
 }
 
 .link-size {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.45);
   letter-spacing: 1px;
 }
 
@@ -315,8 +316,8 @@ onUnmounted(() => {
   align-items: center;
   gap: 8px;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
   padding: 8px 20px;
   font-size: 12px;
   letter-spacing: 2px;

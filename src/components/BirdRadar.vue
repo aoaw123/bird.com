@@ -5,67 +5,42 @@ const props = defineProps({
   bird: { type: Object, required: true }
 })
 
-const cx = 150
-const cy = 150
-const maxR = 110
+const cx = 190, cy = 190, maxR = 150
 const axes = ['speed', 'attack', 'size', 'migration', 'agility', 'rarity']
 const labels = ['速度', '攻击', '体型', '迁徙', '敏捷', '稀有度']
 const gradeMap = { S: 5, A: 4, B: 3, C: 2, D: 1 }
 const gradeNames = ['D', 'C', 'B', 'A', 'S']
+const gradeColors = ['#555', '#889', '#bbc', '#eef', '#fff']
 
-function axisAngle(i) {
-  return (Math.PI * 2 * i) / 6 - Math.PI / 2
-}
+function axisAngle(i) { return (Math.PI * 2 * i) / 6 - Math.PI / 2 }
 
 function pointOnAxis(i, ratio) {
   const a = axisAngle(i)
-  return {
-    x: cx + maxR * ratio * Math.cos(a),
-    y: cy + maxR * ratio * Math.sin(a)
-  }
+  return { x: cx + maxR * ratio * Math.cos(a), y: cy + maxR * ratio * Math.sin(a) }
 }
 
-// Pentagon rings for each grade level
-const rings = computed(() => {
-  return [1, 2, 3, 4, 5].map(level => {
+const rings = computed(() =>
+  [1,2,3,4,5].map(level => {
     const ratio = level / 5
-    const points = axes.map((_, i) => {
-      const p = pointOnAxis(i, ratio)
-      return `${p.x},${p.y}`
-    }).join(' ')
-    return { level, ratio, points, label: gradeNames[level - 1] }
+    const points = axes.map((_, i) => { const p = pointOnAxis(i, ratio); return `${p.x},${p.y}` }).join(' ')
+    return { level, ratio, points, label: gradeNames[level-1], color: gradeColors[level-1] }
   })
-})
+)
 
-// Axis lines
-const axisLines = computed(() => {
-  return axes.map((_, i) => {
-    const p = pointOnAxis(i, 1)
-    return { x1: cx, y1: cy, x2: p.x, y2: p.y }
-  })
-})
+const axisLines = computed(() => axes.map((_, i) => { const p = pointOnAxis(i, 1); return { x1: cx, y1: cy, x2: p.x, y2: p.y } }))
 
-// Label positions (slightly outside the outer ring)
-const labelPositions = computed(() => {
-  return axes.map((_, i) => {
-    const p = pointOnAxis(i, 1.18)
-    return { x: p.x, y: p.y }
-  })
-})
+const labelPositions = computed(() => axes.map((_, i) => { const p = pointOnAxis(i, 1.16); return { x: p.x, y: p.y } }))
 
-// Data polygon
 const dataPoints = computed(() => {
   const panel = props.bird.panel
   if (!panel) return ''
   return axes.map((key, i) => {
-    const grade = panel[key] || 'D'
-    const value = gradeMap[grade] || 1
-    const p = pointOnAxis(i, value / 5)
+    const v = gradeMap[panel[key]] || 1
+    const p = pointOnAxis(i, v / 5)
     return `${p.x},${p.y}`
   }).join(' ')
 })
 
-// Individual data dots for hover
 const dataDots = computed(() => {
   const panel = props.bird.panel
   if (!panel) return []
@@ -73,93 +48,74 @@ const dataDots = computed(() => {
     const grade = panel[key] || 'D'
     const value = gradeMap[grade] || 1
     const p = pointOnAxis(i, value / 5)
-    return {
-      x: p.x,
-      y: p.y,
-      grade,
-      desc: panel.desc?.[key] || '',
-      label: labels[i]
-    }
+    return { x: p.x, y: p.y, grade, desc: panel.desc?.[key] || '', label: labels[i], value }
   })
 })
 
-// Tooltip state
 const hoveredDot = ref(null)
 const tooltipPos = ref({ x: 0, y: 0 })
 
-function onDotEnter(dot, e) {
-  hoveredDot.value = dot
-  updateTooltip(e)
-}
-
-function onDotMove(e) {
-  updateTooltip(e)
-}
-
-function onDotLeave() {
-  hoveredDot.value = null
-}
+function onDotEnter(dot, e) { hoveredDot.value = dot; updateTooltip(e) }
+function onDotMove(e) { updateTooltip(e) }
+function onDotLeave() { hoveredDot.value = null }
 
 function updateTooltip(e) {
   const rect = e.currentTarget.closest('.bird-radar').getBoundingClientRect()
-  tooltipPos.value = {
-    x: e.clientX - rect.left + 12,
-    y: e.clientY - rect.top - 10
-  }
+  tooltipPos.value = { x: e.clientX - rect.left + 14, y: e.clientY - rect.top - 10 }
 }
 </script>
 
 <template>
   <div class="bird-radar" v-if="bird.panel">
-    <svg viewBox="0 0 300 300" class="radar-svg">
-      <!-- Axis lines -->
-      <line
-        v-for="(line, i) in axisLines"
-        :key="'axis-' + i"
-        :x1="line.x1" :y1="line.y1"
-        :x2="line.x2" :y2="line.y2"
-        stroke="rgba(255,255,255,0.12)"
-        stroke-width="1"
+    <svg viewBox="0 0 380 380" class="radar-svg">
+      <defs>
+        <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(59,130,246,0.06)" />
+          <stop offset="100%" stop-color="rgba(59,130,246,0)" />
+        </radialGradient>
+        <linearGradient id="dataFill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(59,130,246,0.35)" />
+          <stop offset="50%" stop-color="rgba(139,92,246,0.25)" />
+          <stop offset="100%" stop-color="rgba(59,130,246,0.15)" />
+        </linearGradient>
+      </defs>
+
+      <!-- Center glow -->
+      <circle :cx="cx" :cy="cy" r="160" fill="url(#radarGlow)" />
+
+      <!-- Rings -->
+      <polygon v-for="ring in rings" :key="'r'+ring.level"
+        :points="ring.points" fill="none"
+        :stroke="ring.level === 5 ? 'rgba(255,255,255,0.18)' : ring.level >= 3 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'"
+        :stroke-width="ring.level === 5 ? 1.5 : 1"
       />
 
-      <!-- Pentagon rings -->
-      <polygon
-        v-for="ring in rings"
-        :key="'ring-' + ring.level"
-        :points="ring.points"
-        fill="none"
-        stroke="rgba(255,255,255,0.08)"
-        stroke-width="1"
-      />
-
-      <!-- Grade labels on top axis -->
-      <text
-        v-for="ring in rings"
-        :key="'gl-' + ring.level"
-        :x="cx + 4"
-        :y="cy - maxR * ring.ratio + 4"
-        fill="rgba(255,255,255,0.25)"
-        font-size="9"
-        font-family="inherit"
+      <!-- Ring grade labels -->
+      <text v-for="ring in rings" :key="'gl'+ring.level"
+        :x="cx + 5" :y="cy - maxR * ring.ratio + 5"
+        :fill="ring.color" font-size="10" font-weight="600"
+        font-family="inherit" letter-spacing="1"
       >{{ ring.label }}</text>
 
-      <!-- Data polygon -->
-      <polygon
-        :points="dataPoints"
-        fill="rgba(59,130,246,0.2)"
-        stroke="rgba(59,130,246,0.7)"
-        stroke-width="2"
-        stroke-linejoin="round"
+      <!-- Axis lines -->
+      <line v-for="(line, i) in axisLines" :key="'ax'+i"
+        :x1="line.x1" :y1="line.y1" :x2="line.x2" :y2="line.y2"
+        stroke="rgba(255,255,255,0.08)" stroke-width="1"
       />
 
-      <!-- Data dots -->
-      <circle
-        v-for="(dot, i) in dataDots"
-        :key="'dot-' + i"
-        :cx="dot.x" :cy="dot.y" r="5"
-        fill="#fff"
-        stroke="rgba(59,130,246,0.9)"
-        stroke-width="2"
+      <!-- Data polygon fill + stroke -->
+      <polygon :points="dataPoints" fill="url(#dataFill)"
+        stroke="rgba(96,165,250,0.8)" stroke-width="2" stroke-linejoin="round"
+      />
+
+      <!-- Data dots with glow -->
+      <circle v-for="(dot, i) in dataDots" :key="'dg'+i"
+        :cx="dot.x" :cy="dot.y" r="3.5"
+        fill="rgba(96,165,250,0.3)"
+      />
+      <circle v-for="(dot, i) in dataDots" :key="'dot'+i"
+        :cx="dot.x" :cy="dot.y" r="4.5"
+        fill="#fff" stroke="rgba(96,165,250,0.9)" stroke-width="2"
         class="data-dot"
         @mouseenter="onDotEnter(dot, $event)"
         @mousemove="onDotMove"
@@ -167,27 +123,26 @@ function updateTooltip(e) {
       />
 
       <!-- Axis labels -->
-      <text
-        v-for="(label, i) in labels"
-        :key="'label-' + i"
-        :x="labelPositions[i].x"
-        :y="labelPositions[i].y"
-        text-anchor="middle"
-        dominant-baseline="central"
-        fill="rgba(255,255,255,0.7)"
-        font-size="12"
-        font-family="inherit"
-        letter-spacing="1"
+      <text v-for="(label, i) in labels" :key="'lb'+i"
+        :x="labelPositions[i].x" :y="labelPositions[i].y"
+        text-anchor="middle" dominant-baseline="central"
+        fill="rgba(255,255,255,0.75)" font-size="13"
+        font-family="inherit" font-weight="500" letter-spacing="2"
       >{{ label }}</text>
+
+      <!-- Grade badges on data dots -->
+      <text v-for="(dot, i) in dataDots" :key="'gd'+i"
+        :x="dot.x" :y="dot.y + 16"
+        text-anchor="middle" dominant-baseline="hanging"
+        :fill="gradeColors[dot.value - 1]" font-size="9"
+        font-weight="700" font-family="inherit" letter-spacing="1"
+        opacity="0.9"
+      >{{ dot.grade }}</text>
     </svg>
 
-    <!-- Tooltip -->
     <Transition name="tooltip-fade">
-      <div
-        v-if="hoveredDot"
-        class="radar-tooltip"
-        :style="{ left: tooltipPos.x + 'px', top: tooltipPos.y + 'px' }"
-      >
+      <div v-if="hoveredDot" class="radar-tooltip"
+        :style="{ left: tooltipPos.x + 'px', top: tooltipPos.y + 'px' }">
         <span class="tooltip-label">{{ hoveredDot.label }}</span>
         <span class="tooltip-grade">{{ hoveredDot.grade }}</span>
         <span class="tooltip-desc">{{ hoveredDot.desc }}</span>
@@ -203,33 +158,31 @@ function updateTooltip(e) {
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
-  background: transparent;
-  backdrop-filter: none;
-  border: none;
-  padding: 0;
   pointer-events: auto;
 }
 
 .radar-svg {
-  width: 280px;
-  height: 280px;
+  width: 340px;
+  height: 340px;
   display: block;
+  filter: drop-shadow(0 0 20px rgba(59,130,246,0.15));
 }
 
 .data-dot {
   cursor: pointer;
-  transition: r 0.2s ease;
+  transition: r 0.2s ease, filter 0.2s ease;
 }
 
 .data-dot:hover {
-  r: 7;
+  r: 6.5;
+  filter: drop-shadow(0 0 8px rgba(96,165,250,0.8));
 }
 
 .radar-tooltip {
   position: absolute;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(96,165,250,0.25);
   border-radius: 8px;
   padding: 10px 14px;
   pointer-events: none;
@@ -242,37 +195,33 @@ function updateTooltip(e) {
 
 .tooltip-label {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 1px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .tooltip-grade {
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(59, 130, 246, 0.9);
-  letter-spacing: 2px;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(96,165,250,1);
+  letter-spacing: 4px;
 }
 
 .tooltip-desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
   font-weight: 300;
   line-height: 1.4;
 }
 
 .tooltip-fade-enter-active,
-.tooltip-fade-leave-active {
-  transition: opacity 0.15s ease;
-}
-
+.tooltip-fade-leave-active { transition: opacity 0.15s ease; }
 .tooltip-fade-enter-from,
-.tooltip-fade-leave-to {
-  opacity: 0;
-}
+.tooltip-fade-leave-to { opacity: 0; }
 
 @media (max-width: 768px) {
   .bird-radar {
-    transform: translateY(-50%) scale(0.65);
+    transform: translateY(-50%) scale(0.55);
     left: 50%;
   }
 }
