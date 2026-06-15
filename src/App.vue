@@ -90,7 +90,7 @@ let wheelTimeout = null
 function onWheel(e) {
   if (showWallpaper.value || showGallery.value) return
   if (wheelTimeout) return
-  wheelTimeout = setTimeout(() => { wheelTimeout = null }, 300)
+  wheelTimeout = setTimeout(() => { wheelTimeout = null }, 500)
   if (e.deltaY > 0) goNext()
   else if (e.deltaY < 0) goPrev()
 }
