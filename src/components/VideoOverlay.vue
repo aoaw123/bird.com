@@ -10,16 +10,12 @@ const emit = defineEmits(['close'])
 const isVisible = ref(false)
 
 function handleKeydown(e) {
-  if (e.key === 'Escape') {
-    handleClose()
-  }
+  if (e.key === 'Escape') handleClose()
 }
 
 function handleClose() {
   isVisible.value = false
-  setTimeout(() => {
-    emit('close')
-  }, 400)
+  setTimeout(() => emit('close'), 400)
 }
 
 function openDouyin() {
@@ -28,9 +24,7 @@ function openDouyin() {
 
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
-  requestAnimationFrame(() => {
-    isVisible.value = true
-  })
+  requestAnimationFrame(() => { isVisible.value = true })
 })
 
 onUnmounted(() => {
@@ -42,33 +36,36 @@ onUnmounted(() => {
   <Teleport to="body">
     <div class="video-overlay" :class="{ visible: isVisible }" @click.self="handleClose">
       <div class="video-content">
-        <!-- Close button -->
         <button class="video-close" @click="handleClose">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
 
-        <!-- Bird name -->
         <div class="video-header">
-          <h2 class="video-bird-name">{{ bird.name }}</h2>
-          <p class="video-bird-name-cn">{{ bird.nameCN }}</p>
+          <p class="video-label">野外实录</p>
+          <h2 class="video-bird-name">{{ bird.nameCN }}</h2>
+          <p class="video-bird-sub">{{ bird.name }}</p>
         </div>
 
-        <!-- Video preview card -->
-        <div class="video-card">
-          <div class="video-placeholder">
-            <div class="play-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z"/>
+        <!-- Preview card using bird's image -->
+        <div class="video-preview" @click="openDouyin">
+          <img
+            :src="bird.image"
+            :alt="bird.nameCN"
+            class="video-thumb"
+          />
+          <div class="play-overlay">
+            <div class="play-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-            <span class="video-label">视频预览</span>
+            <span class="play-text">点击播放</span>
           </div>
         </div>
 
-        <!-- Action button -->
         <button class="douyin-btn" @click="openDouyin">
           <span class="douyin-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -78,8 +75,7 @@ onUnmounted(() => {
           在抖音观看
         </button>
 
-        <!-- Description -->
-        <p class="video-desc">鸟类数量稀少，野外影像珍贵</p>
+        <p class="video-hint">点击视频预览或按钮，在新标签页打开抖音</p>
       </div>
     </div>
   </Teleport>
@@ -91,7 +87,7 @@ onUnmounted(() => {
   inset: 0;
   z-index: 1100;
   background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,164 +95,165 @@ onUnmounted(() => {
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
-
 .video-overlay.visible {
   opacity: 1;
   pointer-events: auto;
 }
-
 .video-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   width: 100%;
-  max-width: 480px;
-  padding: 40px 20px;
+  max-width: 460px;
+  padding: 36px 24px;
   position: relative;
   transform: scale(0.95);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .video-overlay.visible .video-content {
   transform: scale(1);
 }
-
 .video-close {
   position: absolute;
   top: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.6);
-  width: 40px;
-  height: 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.5);
+  width: 36px; height: 36px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
   z-index: 10;
 }
-
 .video-close:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
 }
-
-.video-close:active {
-  transform: scale(0.95);
-}
-
 .video-header {
   text-align: center;
 }
-
-.video-bird-name {
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: 4px;
+.video-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin: 0;
+  margin: 0 0 6px;
 }
-
-.video-bird-name-cn {
-  font-size: 14px;
+.video-bird-name {
+  font-size: 22px;
   font-weight: 300;
   letter-spacing: 3px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 8px;
+  margin: 0;
 }
-
-.video-card {
+.video-bird-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  margin: 4px 0 0;
+}
+.video-preview {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.video-placeholder {
+.video-preview:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.video-preview:hover .play-overlay {
+  background: rgba(0,0,0,0.3);
+}
+.video-preview:hover .play-circle {
+  transform: scale(1.1);
+}
+.video-thumb {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+  transition: background 0.3s;
 }
-
-.play-icon {
-  color: rgba(255, 255, 255, 0.4);
-  transition: color 0.3s ease;
+.play-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
 }
-
-.video-card:hover .play-icon {
-  color: rgba(255, 255, 255, 0.7);
+.play-circle svg {
+  margin-left: 3px;
 }
-
-.video-label {
+.play-text {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255,255,255,0.8);
   letter-spacing: 2px;
 }
-
 .douyin-btn {
   display: flex;
   align-items: center;
   gap: 10px;
   background: linear-gradient(135deg, #fe2c55, #25f4ee);
   border: none;
-  color: #ffffff;
-  padding: 14px 32px;
+  color: #fff;
+  padding: 14px 36px;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 1px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
   font-family: inherit;
 }
-
 .douyin-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(254, 44, 85, 0.3);
+  box-shadow: 0 8px 24px rgba(254,44,85,0.3);
 }
-
 .douyin-btn:active {
   transform: scale(0.97);
 }
-
 .douyin-icon {
   display: flex;
-  align-items: center;
 }
-
-.video-desc {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.35);
+.video-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
   letter-spacing: 1px;
   text-align: center;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
   .video-content {
-    padding: 20px 16px;
-    gap: 20px;
+    padding: 24px 16px;
+    gap: 16px;
   }
-
   .video-bird-name {
     font-size: 18px;
-    letter-spacing: 3px;
   }
-
-  .video-close {
-    top: -4px;
-    right: -4px;
-  }
-
   .douyin-btn {
     padding: 12px 24px;
     font-size: 13px;
