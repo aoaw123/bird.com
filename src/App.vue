@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useSwipe, onKeyStroke } from '@vueuse/core'
 import { birds } from './data/birds.js'
 import BirdViewer from './components/BirdViewer.vue'
@@ -8,15 +8,35 @@ import NavDots from './components/NavDots.vue'
 import ArrowNav from './components/ArrowNav.vue'
 import WallpaperOverlay from './components/WallpaperOverlay.vue'
 import GalleryViewer from './components/GalleryViewer.vue'
+import BirdRadar from './components/BirdRadar.vue'
+import VideoOverlay from './components/VideoOverlay.vue'
+import DataOverlay from './components/DataOverlay.vue'
 import KeyboardHints from './components/KeyboardHints.vue'
+import IntroOverlay from './components/IntroOverlay.vue'
+import AudioToggle from './components/AudioToggle.vue'
 
+const showIntro = ref(true)
 const currentIndex = ref(0)
 const activePanel = ref(null)
 const blurAmount = ref(0)
 const showWallpaper = ref(false)
 const showGallery = ref(false)
+const showVideo = ref(false)
+const showData = ref(false)
 
 const currentBird = computed(() => birds[currentIndex.value])
+
+// --- Intro ---
+function onIntroComplete() {
+  showIntro.value = false
+  activePanel.value = 'factfile'
+}
+
+function onIntroKeydown(e) {
+  if (showIntro.value && e.key !== 'Escape') {
+    showIntro.value = false
+  }
+}
 
 // --- Navigation ---
 function goNext() {
@@ -55,17 +75,38 @@ function closeGallery() {
   showGallery.value = false
 }
 
+function openVideo() {
+  showVideo.value = true
+}
+
+function closeVideo() {
+  showVideo.value = false
+}
+
+function openData() {
+  if (showVideo.value) closeVideo()
+  showData.value = true
+}
+
+function closeData() {
+  showData.value = false
+}
+
 // --- Keyboard navigation ---
 onKeyStroke('ArrowLeft', () => {
-  if (!showWallpaper.value && !showGallery.value) goPrev()
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value && !showData.value) goPrev()
 })
 
 onKeyStroke('ArrowRight', () => {
-  if (!showWallpaper.value && !showGallery.value) goNext()
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value && !showData.value) goNext()
 })
 
 onKeyStroke('Escape', () => {
-  if (showGallery.value) {
+  if (showData.value) {
+    closeData()
+  } else if (showVideo.value) {
+    closeVideo()
+  } else if (showGallery.value) {
     closeGallery()
   } else if (showWallpaper.value) {
     closeWallpaper()
@@ -75,7 +116,7 @@ onKeyStroke('Escape', () => {
 })
 
 onKeyStroke(' ', (e) => {
-  if (!showWallpaper.value && !showGallery.value) {
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value && !showData.value) {
     e.preventDefault()
     if (activePanel.value) {
       closePanel()
@@ -88,7 +129,7 @@ onKeyStroke(' ', (e) => {
 // --- Mouse wheel navigation ---
 let wheelTimeout = null
 function onWheel(e) {
-  if (showWallpaper.value || showGallery.value) return
+  if (showWallpaper.value || showGallery.value || showVideo.value || showData.value) return
   if (wheelTimeout) return
   wheelTimeout = setTimeout(() => { wheelTimeout = null }, 500)
   if (e.deltaY > 0) goNext()
@@ -99,7 +140,7 @@ function onWheel(e) {
 const appContainer = ref(null)
 const { direction } = useSwipe(appContainer, {
   onSwipeEnd() {
-    if (showWallpaper.value || showGallery.value) return
+    if (showWallpaper.value || showGallery.value || showVideo.value || showData.value) return
     if (direction.value === 'left') {
       goNext()
     } else if (direction.value === 'right') {
@@ -122,11 +163,18 @@ watch(currentIndex, (newIdx) => {
 // Preload first next image on mount
 onMounted(() => {
   preloadImage(birds[1].image)
+  window.addEventListener('keydown', onIntroKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onIntroKeydown)
 })
 </script>
 
 <template>
   <div ref="appContainer" class="app" @wheel="onWheel">
+    <IntroOverlay v-if="showIntro" @complete="onIntroComplete" />
+
     <Transition name="fade-bg" mode="out-in" appear>
       <div
         :key="currentBird.id"
@@ -160,6 +208,15 @@ onMounted(() => {
         @toggle-panel="togglePanel"
         @open-wallpaper="openWallpaper"
         @open-gallery="openGallery"
+        @open-video="openVideo"
+        @open-data="openData"
+      />
+    </Transition>
+
+    <Transition name="fade">
+      <BirdRadar
+        v-if="activePanel === 'factfile'"
+        :bird="currentBird"
       />
     </Transition>
 
@@ -169,6 +226,7 @@ onMounted(() => {
         :bird="currentBird"
         :type="activePanel"
         @close="closePanel"
+        @open-data="openData"
       />
     </Transition>
 
@@ -190,7 +248,20 @@ onMounted(() => {
       @close="closeGallery"
     />
 
+    <VideoOverlay
+      v-if="showVideo"
+      :bird="currentBird"
+      @close="closeVideo"
+    />
+
+    <DataOverlay
+      v-if="showData"
+      :bird="currentBird"
+      @close="closeData"
+    />
+
     <KeyboardHints />
+    <AudioToggle />
   </div>
 </template>
 
@@ -232,11 +303,11 @@ onMounted(() => {
   left: 24px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
   z-index: 20;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  padding: 10px 16px;
+  padding: 15px 24px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   opacity: 0.5;
@@ -248,7 +319,7 @@ onMounted(() => {
 }
 
 .blur-label {
-  font-size: 12px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -256,19 +327,19 @@ onMounted(() => {
 }
 
 .blur-value {
-  font-size: 12px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.5);
-  min-width: 40px;
+  min-width: 50px;
   text-align: right;
 }
 
 .blur-slider {
   -webkit-appearance: none;
   appearance: none;
-  width: 100px;
-  height: 4px;
+  width: 150px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
+  border-radius: 3px;
   outline: none;
   cursor: pointer;
 }
@@ -276,8 +347,8 @@ onMounted(() => {
 .blur-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 21px;
+  height: 21px;
   background: #ffffff;
   border-radius: 50%;
   cursor: pointer;

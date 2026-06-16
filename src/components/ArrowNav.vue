@@ -5,12 +5,12 @@ const emit = defineEmits(['prev', 'next'])
 <template>
   <div class="arrow-nav">
     <button class="arrow-btn prev" @click="emit('prev')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </button>
     <button class="arrow-btn next" @click="emit('next')">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </button>
@@ -36,8 +36,8 @@ const emit = defineEmits(['prev', 'next'])
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.5);
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;

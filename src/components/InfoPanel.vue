@@ -1,12 +1,13 @@
 <script setup>
 import { computed, ref, watch, onMounted, nextTick } from 'vue'
+import NumberScroll from './NumberScroll.vue'
 
 const props = defineProps({
   bird: { type: Object, required: true },
   type: { type: String, required: true }
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'open-data'])
 
 const title = computed(() => {
   const titles = {
@@ -24,6 +25,14 @@ const content = computed(() => {
 
 const stats = computed(() => props.bird.factfile?.stats || {})
 const status = computed(() => props.bird.factfile?.status || '')
+
+const statusClass = computed(() => {
+  const s = status.value
+  if (s.includes('濒')) return 'status-danger'
+  if (s.includes('易')) return 'status-warning'
+  if (s.includes('近')) return 'status-caution'
+  return 'status-safe'
+})
 const tags = computed(() => props.bird.factfile?.tags || [])
 
 const bodyStats = computed(() => {
@@ -135,7 +144,7 @@ onMounted(() => {
       </div>
 
       <div class="status-row">
-        <span class="status-badge">{{ status }}</span>
+        <span class="status-badge" :class="statusClass">{{ status }}</span>
         <div class="tags">
           <span v-for="tag in tags" :key="tag" class="tag">{{ tag }}</span>
         </div>
@@ -145,13 +154,18 @@ onMounted(() => {
 
       <div class="section">
         <h4 class="section-title">种群数量</h4>
-        <p class="panel-content">{{ bird.population }}</p>
+        <NumberScroll :target="bird.popCount || 0" :key="bird.id" />
+        <p class="panel-content" style="margin-top: 8px">{{ bird.population }}</p>
       </div>
 
       <div class="section">
         <h4 class="section-title">分布区域</h4>
         <p class="panel-content">{{ bird.where }}</p>
       </div>
+
+      <button class="detail-btn" @click="emit('open-data')">
+        详细数据 →
+      </button>
     </div>
   </div>
 </template>
@@ -159,16 +173,14 @@ onMounted(() => {
 <style scoped>
 .info-panel {
   position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translateY(-50%);
-  width: 380px;
-  max-height: 70vh;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
   overflow-y: auto;
   background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: 28px;
   z-index: 10;
 }
@@ -298,12 +310,31 @@ onMounted(() => {
 
 .status-badge {
   padding: 4px 12px;
-  background: rgba(255, 100, 100, 0.2);
-  border: 1px solid rgba(255, 100, 100, 0.3);
   border-radius: 4px;
   font-size: 12px;
-  color: #ff8888;
   letter-spacing: 1px;
+  background: rgba(100, 200, 100, 0.15);
+  border: 1px solid rgba(100, 200, 100, 0.3);
+  color: #88cc88;
+  transition: all 0.3s ease;
+}
+
+.status-badge.status-danger {
+  background: rgba(255, 80, 80, 0.15);
+  border-color: rgba(255, 80, 80, 0.25);
+  color: #ff6666;
+}
+
+.status-badge.status-warning {
+  background: rgba(255, 160, 60, 0.15);
+  border-color: rgba(255, 160, 60, 0.25);
+  color: #ffa83c;
+}
+
+.status-badge.status-caution {
+  background: rgba(255, 210, 60, 0.15);
+  border-color: rgba(255, 210, 60, 0.25);
+  color: #f5c842;
 }
 
 .tags {
@@ -317,6 +348,29 @@ onMounted(() => {
   border-radius: 4px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.detail-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.detail-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.detail-btn:active {
+  transform: scale(0.98);
 }
 
 .panel-content {
