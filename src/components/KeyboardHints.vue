@@ -7,7 +7,7 @@ const showHints = ref(false)
 <template>
   <div class="keyboard-hints" @mouseenter="showHints = true" @mouseleave="showHints = false">
     <div class="hint-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
         <line x1="6" y1="10" x2="6" y2="10"></line>
         <line x1="10" y1="10" x2="10" y2="10"></line>
@@ -22,6 +22,10 @@ const showHints = ref(false)
         <div class="hint-item">
           <kbd>←</kbd><kbd>→</kbd>
           <span>切换鸟类</span>
+        </div>
+        <div class="hint-item">
+          <kbd>🖱️</kbd>
+          <span>滚轮切换</span>
         </div>
         <div class="hint-item">
           <kbd>Space</kbd>
@@ -39,15 +43,15 @@ const showHints = ref(false)
 <style scoped>
 .keyboard-hints {
   position: absolute;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 28px;
   z-index: 15;
 }
 
 .hint-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -65,23 +69,23 @@ const showHints = ref(false)
 
 .hint-popup {
   position: absolute;
-  bottom: 44px;
+  bottom: 66px;
   right: 0;
   background: rgba(20, 20, 20, 0.95);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 14px 18px;
+  border-radius: 12px;
+  padding: 18px 24px;
   white-space: nowrap;
-  min-width: 160px;
+  min-width: 180px;
 }
 
 .hint-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 0;
-  font-size: 12px;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -89,13 +93,13 @@ const showHints = ref(false)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  height: 22px;
-  padding: 0 6px;
+  min-width: 36px;
+  height: 30px;
+  padding: 0 8px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  font-size: 10px;
+  border-radius: 5px;
+  font-size: 14px;
   font-family: inherit;
   color: rgba(255, 255, 255, 0.7);
   letter-spacing: 0.5px;

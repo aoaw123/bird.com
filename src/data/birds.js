@@ -3,6 +3,7 @@ export const birds = [
     id: 1,
     name: 'Scaly-sided Merganser',
     nameCN: '中华秋沙鸭',
+    hasDetailData: true,
     image: '/birds/1. 中华秋沙鸭/1.jpg',
     gallery: ['/birds/1. 中华秋沙鸭/1.jpg', '/birds/1. 中华秋沙鸭/2.jpg', '/birds/1. 中华秋沙鸭/3.jpg', '/birds/1. 中华秋沙鸭/4.jpg', '/birds/1. 中华秋沙鸭/5.jpg'],
     factfile: {
@@ -12,6 +13,7 @@ export const birds = [
       tags: ['国鸭', '鳞状斑', '湿地指示物种']
     },
     population: '全球种群少于5000只成鸟，趋势：下降。主要分布于俄罗斯远东地区（85%）及中国东北。',
+    popCount: 4900,
     where: '繁殖地：俄罗斯远东、中国东北（长白山、小兴安岭）。越冬地：中国中部和南部（长江流域）、日本、韩国。',
 
         video: 'https://www.douyin.com/jingxuan/search/%E4%B8%AD%E5%8D%8E%E7%A7%8B%E6%B2%99%E9%B8%AD?aid=48e52d92-7a60-4e83-ba3e-18710db0188d&modal_id=7640508627354144040&type=general',
@@ -32,6 +34,7 @@ panel: {
     id: 2,
     name: 'Oriental Pied Hornbill',
     nameCN: '冠斑犀鸟',
+    hasDetailData: true,
     image: '/birds/2. 冠斑犀鸟/1.jpg',
     gallery: ['/birds/2. 冠斑犀鸟/1.jpg', '/birds/2. 冠斑犀鸟/2.jpg', '/birds/2. 冠斑犀鸟/3.jpg', '/birds/2. 冠斑犀鸟/4.jpg', '/birds/2. 冠斑犀鸟/5.jpg'],
     factfile: {
@@ -41,6 +44,7 @@ panel: {
       tags: ['盔突', '大型种子传播者', '次生洞巢']
     },
     population: '在分布区内较为常见，是犀鸟科中分布最广、数量相对较多的种类，趋势稳定。',
+    popCount: 56000,
     where: '印度东部、尼泊尔、缅甸、泰国、老挝、柬埔寨、越南、马来西亚。中国分布：西藏东南部、云南西南部、广西西南部。',
 
         video: 'https://www.douyin.com/jingxuan/search/%E5%86%A0%E6%96%91%E7%8A%80%E9%B8%9F?aid=873d5a68-968a-464c-ad17-35f6a04a2053&modal_id=7523613936688614671&type=general',
@@ -61,6 +65,7 @@ panel: {
     id: 3,
     name: "Mrs. Hume's Pheasant",
     nameCN: '黑颈长尾雉',
+    hasDetailData: true,
     image: '/birds/3. 黑颈长尾雉/1.jpg',
     gallery: ['/birds/3. 黑颈长尾雉/1.jpg', '/birds/3. 黑颈长尾雉/2.jpg', '/birds/3. 黑颈长尾雉/3.jpg', '/birds/3. 黑颈长尾雉/4.jpg', '/birds/3. 黑颈长尾雉/5.jpg'],
     factfile: {
@@ -70,6 +75,7 @@ panel: {
       tags: ['长尾雉', '印度省鸟', 'CITES附录I']
     },
     population: '全球种群数量未找到具体数据，趋势：下降。因栖息地丧失和捕猎而受威胁。',
+    popCount: 2500,
     where: '印度东北部、缅甸北部、泰国西北部。中国分布：云南西南部、广西西部、贵州西南部。',
 
         video: 'https://www.douyin.com/jingxuan/search/%E9%BB%91%E9%A2%88%E9%95%BF%E5%B0%BE%E9%9B%89?modal_id=7217508535180053772&type=general',
@@ -90,6 +96,7 @@ panel: {
     id: 4,
     name: "Cabot's Tragopan",
     nameCN: '黄腹角雉',
+    hasDetailData: true,
     image: '/birds/4. 黄腹角雉/1.jpg',
     gallery: ['/birds/4. 黄腹角雉/1.jpg', '/birds/4. 黄腹角雉/2.jpg', '/birds/4. 黄腹角雉/3.jpg', '/birds/4. 黄腹角雉/4.jpg', '/birds/4. 黄腹角雉/5.jpg'],
     factfile: {
@@ -99,6 +106,7 @@ panel: {
       tags: ['中国特有', '吐绶鸡', '肉角+肉裙']
     },
     population: '全球种群估计少于10000只，趋势：下降。主要威胁为森林砍伐。',
+    popCount: 9300,
     where: '中国东南部特有种：浙江、福建、江西、广东、湖南、广西。',
 
         video: 'https://www.douyin.com/user/self/search/%E9%BB%84%E8%85%B9%E8%A7%92%E9%9B%89?aid=4fa71976-c091-435f-b00f-edf761554d59&modal_id=7646253032090438946&type=video',
@@ -119,6 +127,7 @@ panel: {
     id: 5,
     name: 'Black-faced Spoonbill',
     nameCN: '黑脸琵鹭',
+    hasDetailData: true,
     image: '/birds/5. 黑脸琵鹭/1.jpg',
     gallery: ['/birds/5. 黑脸琵鹭/1.jpg', '/birds/5. 黑脸琵鹭/2.jpg', '/birds/5. 黑脸琵鹭/3.jpg', '/birds/5. 黑脸琵鹭/4.jpg', '/birds/5. 黑脸琵鹭/5.jpg'],
     factfile: {
@@ -128,6 +137,7 @@ panel: {
       tags: ['黑面舞者', '匙状喙', '全球濒危']
     },
     population: '2022年全球同步普查记录6162只，趋势：上升。自1980年代接近灭绝后持续恢复。',
+    popCount: 6162,
     where: '繁殖地：朝鲜半岛西海岸。越冬地：台湾、香港、澳门、越南、韩国济州岛、日本。中国分布：东部沿海各省。',
 
         video: 'https://www.douyin.com/user/self/search/%E9%BB%91%E8%84%B8%E7%90%B5%E9%B9%AD?aid=58cc58e3-3c39-45f7-9a5c-413bba921c19&modal_id=7485939158851063094&type=general',
@@ -148,6 +158,7 @@ panel: {
     id: 6,
     name: 'White-eared Night Heron',
     nameCN: '海南鳽',
+    hasDetailData: true,
     image: '/birds/6. 海南鳽/1.jpg',
     gallery: ['/birds/6. 海南鳽/1.jpg', '/birds/6. 海南鳽/2.jpg', '/birds/6. 海南鳽/3.jpg', '/birds/6. 海南鳽/4.jpg', '/birds/6. 海南鳽/5.jpg'],
     factfile: {
@@ -157,6 +168,7 @@ panel: {
       tags: ['夜行性', '极度罕见', '濒危鹭科']
     },
     population: '全球种群数量估计在1500-4000只之间，趋势下降。种群密度极低。',
+    popCount: 2800,
     where: '中国南方（海南、广东、广西、福建、江西、湖南、贵州、云南）、越南北部。',
 
         video: 'https://www.douyin.com/user/self/search/%E6%B5%B7%E5%8D%97%E9%B3%BD?modal_id=7641519828448103732&type=general',
@@ -177,6 +189,7 @@ panel: {
     id: 7,
     name: 'Nonggang Babbler',
     nameCN: '弄岗穗鹛',
+    hasDetailData: true,
     image: '/birds/7. 弄岗穗鹛/1.jpg',
     gallery: ['/birds/7. 弄岗穗鹛/1.jpg', '/birds/7. 弄岗穗鹛/2.jpg', '/birds/7. 弄岗穗鹛/3.jpg', '/birds/7. 弄岗穗鹛/4.jpg', '/birds/7. 弄岗穗鹛/5.jpg'],
     factfile: {
@@ -186,6 +199,7 @@ panel: {
       tags: ['2008年新发现', '中国特有', '喀斯特地貌特有']
     },
     population: '全球种群数量估计在2500-9999只之间，趋势下降。仅限于广西弄岗保护区和越南北部边境。',
+    popCount: 5200,
     where: '广西弄岗自然保护区，可能分布于云南东南部和越南北部边境。留鸟，不迁徙。',
 
         video: 'https://www.douyin.com/user/self/search/%E5%BC%84%E5%B2%97%E7%A9%97%E9%B9%9B?modal_id=7481650741959036171&type=general',
@@ -206,6 +220,7 @@ panel: {
     id: 8,
     name: 'Silver Pheasant',
     nameCN: '白鹇',
+    hasDetailData: true,
     image: '/birds/8. 白鹇/1.jpg',
     gallery: ['/birds/8. 白鹇/1.jpg', '/birds/8. 白鹇/2.jpg', '/birds/8. 白鹇/3.jpg', '/birds/8. 白鹇/4.jpg', '/birds/8. 白鹇/5.jpg'],
     factfile: {
@@ -215,6 +230,7 @@ panel: {
       tags: ['雉科代表', '古典文化象征', '雌雄异色']
     },
     population: '全球种群数量整体尚属常见，趋势稳定。有15个亚种，部分如海南亚种受胁。',
+    popCount: 120000,
     where: '中国东部和南部、东南亚大陆的山地森林。分布省份：云南、广西、广东、福建、江西、湖南、贵州、四川、海南等。',
 
         video: 'https://www.douyin.com/user/self/search/%E7%99%BD%E9%B9%87?modal_id=7486775760829615394&type=video',
@@ -235,6 +251,7 @@ panel: {
     id: 9,
     name: 'Greater Coucal',
     nameCN: '褐翅鸦鹃',
+    hasDetailData: true,
     image: '/birds/9. 褐翅鸦鹃/1.jpg',
     gallery: ['/birds/9. 褐翅鸦鹃/1.jpg', '/birds/9. 褐翅鸦鹃/2.jpg', '/birds/9. 褐翅鸦鹃/3.jpg', '/birds/9. 褐翅鸦鹃/4.jpg', '/birds/9. 褐翅鸦鹃/5.jpg'],
     factfile: {
@@ -244,6 +261,7 @@ panel: {
       tags: ['非寄生杜鹃', '地栖性', '低沉共鸣叫声']
     },
     population: '全球种群数量在适宜栖息地中较为常见，趋势稳定。分布范围极广。',
+    popCount: 680000,
     where: '印度次大陆、中国南方、东南亚至巽他群岛。分布省份：云南、广西、广东、海南、福建、浙江、江西等。',
 
         video: 'https://www.douyin.com/user/self/search/%E8%A4%90%E7%BF%85%E9%B8%A6%E9%B9%83?modal_id=7228964576350506273&type=video',
@@ -264,6 +282,7 @@ panel: {
     id: 10,
     name: 'Oriental Stork',
     nameCN: '东方白鹳',
+    hasDetailData: true,
     image: '/birds/10. 东方白鹳/1.jpg',
     gallery: ['/birds/10. 东方白鹳/1.jpg', '/birds/10. 东方白鹳/2.jpg', '/birds/10. 东方白鹳/3.jpg', '/birds/10. 东方白鹳/4.jpg', '/birds/10. 东方白鹳/5.jpg', '/birds/10. 东方白鹳/6.jpg'],
     factfile: {
@@ -273,6 +292,7 @@ panel: {
       tags: ['大型涉禽', '迁徙鸟类', '中日韩保护象征']
     },
     population: '全球种群数量估计约3000-5000只，趋势稳定中略有回升。在日本和韩国已野外灭绝，通过人工繁殖再引入。',
+    popCount: 4000,
     where: '繁殖地：俄罗斯远东、中国东北（黑龙江、吉林、辽宁）。越冬地：长江中下游（江西鄱阳湖、江苏、安徽）。',
 
         video: 'https://www.douyin.com/user/self/search/%E4%B8%9C%E6%96%B9%E7%99%BD%E9%B9%B3?aid=1c63d4c3-92f3-475e-b75f-aee4329ae9a3&modal_id=7647867072223098042&type=video',

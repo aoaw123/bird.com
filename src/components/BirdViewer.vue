@@ -6,7 +6,7 @@ const props = defineProps({
   activePanel: { type: String, default: null }
 })
 
-const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery', 'open-video'])
+const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery', 'open-video', 'open-data'])
 
 const imageLoaded = ref(false)
 const imageError = ref(false)
@@ -65,7 +65,7 @@ const buttons = [
         @click.stop="emit('open-video')"
         title="观看视频"
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="white">
           <path d="M8 5v14l11-7z"/>
         </svg>
       </button>
@@ -85,6 +85,13 @@ const buttons = [
         {{ btn.label }}
       </button>
     </div>
+    <button
+      class="action-btn detail-data-btn"
+      :class="{ active: activePanel === 'data' }"
+      @click="emit('open-data')"
+    >
+      详细数据
+    </button>
   </div>
 </template>
 
@@ -115,10 +122,10 @@ const buttons = [
 /* Floating play button */
 .play-btn {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 56px;
-  height: 56px;
+  right: 18px;
+  bottom: 18px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
@@ -214,6 +221,10 @@ const buttons = [
   margin-top: 8px;
 }
 
+.detail-data-btn {
+  margin-top: 12px;
+}
+
 .action-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -251,16 +262,16 @@ const buttons = [
   }
 
   .play-btn {
-    width: 44px;
-    height: 44px;
-    right: 8px;
-    bottom: 8px;
+    width: 66px;
+    height: 66px;
+    right: 12px;
+    bottom: 12px;
     opacity: 1;
   }
 
   .play-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 33px;
+    height: 33px;
   }
 
   .bird-name {

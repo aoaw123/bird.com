@@ -1,12 +1,13 @@
 <script setup>
 import { computed, ref, watch, onMounted, nextTick } from 'vue'
+import NumberScroll from './NumberScroll.vue'
 
 const props = defineProps({
   bird: { type: Object, required: true },
   type: { type: String, required: true }
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'open-data'])
 
 const title = computed(() => {
   const titles = {
@@ -153,13 +154,18 @@ onMounted(() => {
 
       <div class="section">
         <h4 class="section-title">种群数量</h4>
-        <p class="panel-content">{{ bird.population }}</p>
+        <NumberScroll :target="bird.popCount || 0" :key="bird.id" />
+        <p class="panel-content" style="margin-top: 8px">{{ bird.population }}</p>
       </div>
 
       <div class="section">
         <h4 class="section-title">分布区域</h4>
         <p class="panel-content">{{ bird.where }}</p>
       </div>
+
+      <button class="detail-btn" @click="emit('open-data')">
+        详细数据 →
+      </button>
     </div>
   </div>
 </template>
@@ -342,6 +348,29 @@ onMounted(() => {
   border-radius: 4px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.detail-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.detail-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.detail-btn:active {
+  transform: scale(0.98);
 }
 
 .panel-content {
