@@ -6,7 +6,7 @@ const props = defineProps({
   activePanel: { type: String, default: null }
 })
 
-const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery'])
+const emit = defineEmits(['toggle-panel', 'open-wallpaper', 'open-gallery', 'open-video'])
 
 const imageLoaded = ref(false)
 const imageError = ref(false)
@@ -28,7 +28,8 @@ function onImageError() {
 
 const buttons = [
   { key: 'factfile', label: '物种档案' },
-  { key: 'wallpaper', label: 'Wallpaper' }
+  { key: 'wallpaper', label: 'Wallpaper' },
+  { key: 'video', label: '视频' }
 ]
 </script>
 
@@ -56,6 +57,18 @@ const buttons = [
         @load="onImageLoad"
         @error="onImageError"
       />
+
+      <!-- Floating play button -->
+      <button
+        v-if="bird.video"
+        class="play-btn"
+        @click.stop="emit('open-video')"
+        title="观看视频"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
     </div>
 
     <h1 class="bird-name">{{ bird.name }}</h1>
@@ -67,7 +80,7 @@ const buttons = [
         :key="btn.key"
         class="action-btn"
         :class="{ active: activePanel === btn.key }"
-        @click="btn.key === 'wallpaper' ? emit('open-wallpaper') : emit('toggle-panel', btn.key)"
+        @click="btn.key === 'video' ? emit('open-video') : btn.key === 'wallpaper' ? emit('open-wallpaper') : emit('toggle-panel', btn.key)"
       >
         {{ btn.label }}
       </button>
@@ -97,6 +110,40 @@ const buttons = [
 
 .bird-image-wrapper:hover {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+}
+
+/* Floating play button */
+.play-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.bird-image-wrapper:hover .play-btn {
+  opacity: 1;
+}
+
+.play-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.play-btn:active {
+  transform: scale(0.95);
 }
 
 /* Skeleton */
@@ -201,6 +248,19 @@ const buttons = [
   .bird-image-wrapper {
     width: 240px;
     height: 240px;
+  }
+
+  .play-btn {
+    width: 44px;
+    height: 44px;
+    right: 8px;
+    bottom: 8px;
+    opacity: 1;
+  }
+
+  .play-btn svg {
+    width: 22px;
+    height: 22px;
   }
 
   .bird-name {

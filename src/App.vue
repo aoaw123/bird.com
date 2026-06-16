@@ -9,6 +9,7 @@ import ArrowNav from './components/ArrowNav.vue'
 import WallpaperOverlay from './components/WallpaperOverlay.vue'
 import GalleryViewer from './components/GalleryViewer.vue'
 import BirdRadar from './components/BirdRadar.vue'
+import VideoOverlay from './components/VideoOverlay.vue'
 import KeyboardHints from './components/KeyboardHints.vue'
 
 const currentIndex = ref(0)
@@ -16,6 +17,7 @@ const activePanel = ref(null)
 const blurAmount = ref(0)
 const showWallpaper = ref(false)
 const showGallery = ref(false)
+const showVideo = ref(false)
 
 const currentBird = computed(() => birds[currentIndex.value])
 
@@ -56,17 +58,27 @@ function closeGallery() {
   showGallery.value = false
 }
 
+function openVideo() {
+  showVideo.value = true
+}
+
+function closeVideo() {
+  showVideo.value = false
+}
+
 // --- Keyboard navigation ---
 onKeyStroke('ArrowLeft', () => {
-  if (!showWallpaper.value && !showGallery.value) goPrev()
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value) goPrev()
 })
 
 onKeyStroke('ArrowRight', () => {
-  if (!showWallpaper.value && !showGallery.value) goNext()
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value) goNext()
 })
 
 onKeyStroke('Escape', () => {
-  if (showGallery.value) {
+  if (showVideo.value) {
+    closeVideo()
+  } else if (showGallery.value) {
     closeGallery()
   } else if (showWallpaper.value) {
     closeWallpaper()
@@ -76,7 +88,7 @@ onKeyStroke('Escape', () => {
 })
 
 onKeyStroke(' ', (e) => {
-  if (!showWallpaper.value && !showGallery.value) {
+  if (!showWallpaper.value && !showGallery.value && !showVideo.value) {
     e.preventDefault()
     if (activePanel.value) {
       closePanel()
@@ -89,7 +101,7 @@ onKeyStroke(' ', (e) => {
 // --- Mouse wheel navigation ---
 let wheelTimeout = null
 function onWheel(e) {
-  if (showWallpaper.value || showGallery.value) return
+  if (showWallpaper.value || showGallery.value || showVideo.value) return
   if (wheelTimeout) return
   wheelTimeout = setTimeout(() => { wheelTimeout = null }, 500)
   if (e.deltaY > 0) goNext()
@@ -100,7 +112,7 @@ function onWheel(e) {
 const appContainer = ref(null)
 const { direction } = useSwipe(appContainer, {
   onSwipeEnd() {
-    if (showWallpaper.value || showGallery.value) return
+    if (showWallpaper.value || showGallery.value || showVideo.value) return
     if (direction.value === 'left') {
       goNext()
     } else if (direction.value === 'right') {
@@ -161,6 +173,7 @@ onMounted(() => {
         @toggle-panel="togglePanel"
         @open-wallpaper="openWallpaper"
         @open-gallery="openGallery"
+        @open-video="openVideo"
       />
     </Transition>
 
@@ -196,6 +209,12 @@ onMounted(() => {
       v-if="showGallery"
       :bird="currentBird"
       @close="closeGallery"
+    />
+
+    <VideoOverlay
+      v-if="showVideo"
+      :bird="currentBird"
+      @close="closeVideo"
     />
 
     <KeyboardHints />
