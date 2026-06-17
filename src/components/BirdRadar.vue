@@ -114,6 +114,10 @@ const normValues = computed(() => {
   }
   return stats.map((stat, i) => {
     if (stat.value !== null && stat.value !== undefined && Number.isFinite(stat.value)) {
+      // Attack & Agility: use panel grade
+      if (axes[i] === 'attack' || axes[i] === 'agility') {
+        return (gradeMap[panel[axes[i]]] || 1) / dataScale
+      }
       // Rarity: log10 normalisation (population spans 2500–680000)
       if (axes[i] === 'rarity') {
         return Math.log10(stat.value) / Math.log10(stat.max)
@@ -134,6 +138,10 @@ const valueTexts = computed(() => {
     return axes.map(key => panel ? (panel[key] || 'D') : 'D')
   }
   return stats.map((stat, i) => {
+    // Attack & Agility: show grade instead of numeric
+    if (axes[i] === 'attack' || axes[i] === 'agility') {
+      return panel[axes[i]] || 'D'
+    }
     if (stat.value !== null && stat.value !== undefined && Number.isFinite(stat.value)) {
       // Population: format with commas
       if (axes[i] === 'rarity') {
