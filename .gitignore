@@ -5,3 +5,7 @@
 node_modules/
 inspo
 triage/
+server/birds.db
+server/birds.db-wal
+server/birds.db-shm
+dist/
