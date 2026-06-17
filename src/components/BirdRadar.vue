@@ -86,17 +86,17 @@ const physicalStats = computed(() => {
     : weightG !== null ? weightG / 1000
     : null
 
-  const bodyLen  = extractValue(body, ['体型数据.体长.种族平均_cm'])
-  const wingspan = extractValue(body, ['体型数据.翼展.种族平均_cm'])
-  const lifespan = extractValue(body, ['生命繁殖数据.寿命.野外平均寿命_年'])
+  const bodyLen      = extractValue(body, ['体型数据.体长.种族平均_cm'])
+  const agilitySpeed  = extractValue(body, ['运动能力.飞行速度.最大速度_km_h'])
+  const rarityPop     = props.bird?.popCount ?? null
 
   return [
-    { label: '速度',  key: 'speed',     value: speedVal,  max: 100, unit: 'km/h', decimals: 0 },
-    { label: '攻击',  key: 'attack',    value: weightInKg,max: 5,   unit: 'kg',   decimals: 2 },
-    { label: '体型',  key: 'size',      value: bodyLen,   max: 130, unit: 'cm',   decimals: 0 },
-    { label: '迁徙',  key: 'migration', value: null,      max: 5,   unit: '',     decimals: 0 },
-    { label: '敏捷',  key: 'agility',   value: wingspan,  max: 250, unit: 'cm',   decimals: 0 },
-    { label: '稀有度',key: 'rarity',    value: lifespan,  max: 20,  unit: '年',   decimals: 0 },
+    { label: '速度',  key: 'speed',     value: speedVal,     max: 100,    unit: 'km/h', decimals: 0 },
+    { label: '攻击',  key: 'attack',    value: weightInKg,   max: 5,      unit: 'kg',   decimals: 2 },
+    { label: '体型',  key: 'size',      value: bodyLen,      max: 130,    unit: 'cm',   decimals: 0 },
+    { label: '迁徙',  key: 'migration', value: null,         max: 5,      unit: '',     decimals: 0 },
+    { label: '敏捷',  key: 'agility',   value: agilitySpeed, max: 120,    unit: 'km/h', decimals: 0 },
+    { label: '稀有度',key: 'rarity',    value: rarityPop,    max: 700000,  unit: '只',   decimals: 0 },
   ]
 })
 
@@ -114,6 +114,10 @@ const normValues = computed(() => {
   }
   return stats.map((stat, i) => {
     if (stat.value !== null && stat.value !== undefined && Number.isFinite(stat.value)) {
+      // Rarity: log10 normalisation (population spans 2500–680000)
+      if (axes[i] === 'rarity') {
+        return Math.log10(stat.value) / Math.log10(stat.max)
+      }
       return stat.value / stat.max
     }
     // fallback to panel grade
@@ -131,6 +135,12 @@ const valueTexts = computed(() => {
   }
   return stats.map((stat, i) => {
     if (stat.value !== null && stat.value !== undefined && Number.isFinite(stat.value)) {
+      // Population: format with commas
+      if (axes[i] === 'rarity') {
+        const n = Math.round(stat.value)
+        const formatted = n.toLocaleString('en-US')
+        return `${formatted} ${stat.unit}`
+      }
       const fmt = Number(stat.value).toFixed(stat.decimals)
       return stat.unit ? `${fmt} ${stat.unit}` : fmt
     }
