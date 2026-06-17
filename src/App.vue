@@ -1,7 +1,7 @@
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useSwipe, onKeyStroke } from '@vueuse/core'
-import { fetchBirds } from './api/birds.js'
+import { birds } from './data/birds.js'
 import BirdViewer from './components/BirdViewer.vue'
 import InfoPanel from './components/InfoPanel.vue'
 import NavDots from './components/NavDots.vue'
@@ -23,10 +23,8 @@ const showWallpaper = ref(false)
 const showGallery = ref(false)
 const showVideo = ref(false)
 const showData = ref(false)
-const birds = ref([])
-const loading = ref(true)
 
-const currentBird = computed(() => birds.value[currentIndex.value] || null)
+const currentBird = computed(() => birds[currentIndex.value])
 
 // --- Intro ---
 function onIntroComplete() {
@@ -42,11 +40,11 @@ function onIntroKeydown(e) {
 
 // --- Navigation ---
 function goNext() {
-  currentIndex.value = (currentIndex.value + 1) % birds.value.length
+  currentIndex.value = (currentIndex.value + 1) % birds.length
 }
 
 function goPrev() {
-  currentIndex.value = (currentIndex.value - 1 + birds.value.length) % birds.value.length
+  currentIndex.value = (currentIndex.value - 1 + birds.length) % birds.length
 }
 
 function goTo(index) {
@@ -158,21 +156,13 @@ function preloadImage(url) {
 }
 
 watch(currentIndex, (newIdx) => {
-  if (!birds.value.length) return
-  const nextIdx = (newIdx + 1) % birds.value.length
-  preloadImage(birds.value[nextIdx].image)
+  const nextIdx = (newIdx + 1) % birds.length
+  preloadImage(birds[nextIdx].image)
 })
 
-// Load birds from API on mount
-onMounted(async () => {
-  try {
-    birds.value = await fetchBirds()
-    if (birds.value.length > 1) preloadImage(birds.value[1].image)
-  } catch (e) {
-    console.error('Failed to load birds:', e)
-  } finally {
-    loading.value = false
-  }
+// Preload first next image on mount
+onMounted(() => {
+  preloadImage(birds[1].image)
   window.addEventListener('keydown', onIntroKeydown)
 })
 
@@ -183,9 +173,6 @@ onUnmounted(() => {
 
 <template>
   <div ref="appContainer" class="app" @wheel="onWheel">
-    <div v-if="loading" class="loading">正在加载鸟类数据…</div>
-
-    <template v-if="!loading && birds.length">
     <IntroOverlay v-if="showIntro" @complete="onIntroComplete" />
 
     <Transition name="fade-bg" mode="out-in" appear>
@@ -244,7 +231,7 @@ onUnmounted(() => {
     </Transition>
 
     <NavDots
-      :total="birds.value.length"
+      :total="birds.length"
       :current="currentIndex"
       @go-to="goTo"
     />
@@ -275,23 +262,8 @@ onUnmounted(() => {
 
     <KeyboardHints />
     <AudioToggle />
-    </template>
   </div>
 </template>
-
-<style>
-.loading {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.6);
-  font-size: 18px;
-  z-index: 100;
-  background: #0d0d0d;
-}
-</style>
 
 <style scoped>
 .app {
