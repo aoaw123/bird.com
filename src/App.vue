@@ -277,6 +277,7 @@ onUnmounted(() => {
     <AudioToggle />
     </template>
   </div>
+</template>
 
 <style>
 .loading {
@@ -291,7 +292,6 @@ onUnmounted(() => {
   background: #0d0d0d;
 }
 </style>
-</template>
 
 <style scoped>
 .app {
